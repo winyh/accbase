@@ -11,6 +11,8 @@ func InitApi(r *gin.Engine){
 	v1 := r.Group("/api")
 	{
 		v1.GET("/ping", Controllers.Ping)
+		v1.POST("/token", Controllers.GetToken)
+		v1.POST("/user/login", Controllers.UserLogin)
 		v1.POST("/user/create", Controllers.UserCreate)
 		v1.POST("/user/delete", Controllers.UserDestroy)
 		v1.POST("/user/update", Controllers.UserUpdate)

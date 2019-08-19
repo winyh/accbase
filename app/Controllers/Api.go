@@ -5,8 +5,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/casbin/casbin"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"accbase/app/Models"
+	"time"
 )
 
 type Admins struct {
@@ -35,6 +37,28 @@ func Ping(c *gin.Context) {
 
 	c.JSON(200, gin.H{
 		"message": msg,
+	})
+}
+
+func GetToken(c *gin.Context)  {
+	hmacSampleSecret := []byte("my_secret_key")
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"foo": "bar",
+		"nbf": time.Date(2015, 10, 10, 12, 0, 0, 0, time.UTC).Unix(),
+	})
+
+	tokenString, err := token.SignedString(hmacSampleSecret)
+	fmt.Println(tokenString, err)
+
+	c.JSON(200, gin.H{
+		"token": tokenString,
+	})
+}
+
+func UserLogin(c *gin.Context)  {
+	c.JSON(200, gin.H{
+		"message": "登录成功！",
 	})
 }
 
