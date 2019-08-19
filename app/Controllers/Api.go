@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"github.com/casbin/casbin"
 	"net/http"
 	"accbase/app/Models"
 )
@@ -16,8 +17,24 @@ type Admins struct {
 }
 
 func Ping(c *gin.Context) {
+	e := casbin.NewEnforcer("./casbin/model.conf", "./casbin/policy.csv")
+
+	sub := "alice" // the user that wants to access a resource.
+	obj := "data1" // the resource that is going to be accessed.
+	act := "write" // the operation that the user performs on the resource.
+
+	var msg string
+
+	if e.Enforce(sub, obj, act) == true {
+		fmt.Println("进入了")
+		msg = "进入了"
+	} else {
+		fmt.Println("拒绝了")
+		msg = "无权访问"
+	}
+
 	c.JSON(200, gin.H{
-		"message": "pong",
+		"message": msg,
 	})
 }
 
