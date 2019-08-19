@@ -40,11 +40,25 @@ func Ping(c *gin.Context) {
 	})
 }
 
+type Params struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 func GetToken(c *gin.Context)  {
+	var json  Params
+	err := c.BindJSON(&json)
+
+	if err != nil {
+		fmt.Printf("mysql connect error %v", err)
+		return
+	}
+
 	hmacSampleSecret := []byte("my_secret_key")
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"foo": "bar",
+		"username": json.Username,
+		"password": json.Password, // 21219256@qq.com
 		"nbf": time.Date(2015, 10, 10, 12, 0, 0, 0, time.UTC).Unix(),
 	})
 
@@ -56,10 +70,36 @@ func GetToken(c *gin.Context)  {
 	})
 }
 
-func UserLogin(c *gin.Context)  {
-	c.JSON(200, gin.H{
-		"message": "登录成功！",
+func UserInfo(c *gin.Context)  {
+	hmacSampleSecret := []byte("my_secret_key")
+	tokenString := c.Request.Header.Get("token")
+	// tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJuYmYiOjE0NDQ0Nzg0MDB9.-BRTwjN-sAlUjO-82qDrNHdMtGAwgWH05PrN49Ep_sU"
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+
+		// Don't forget to validate the alg is what you expect:
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		}
+
+		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
+		return hmacSampleSecret, nil
 	})
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		fmt.Println(claims["username"], claims["nbf"])
+
+		c.JSON(200, gin.H{
+			"username": claims["username"],
+			"password": claims["password"],
+		})
+
+	} else {
+		fmt.Println(err)
+		c.JSON(200, gin.H{
+			"message": "获取失败！",
+		})
+	}
 }
 
 func UserCreate(c *gin.Context) {
