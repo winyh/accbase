@@ -4,8 +4,8 @@ import (
 	"accbase/config"
 	"fmt"
 	"github.com/casbin/casbin"
-	"github.com/gin-gonic/gin"
 	_ "accbase/config"
+	"accbase/routes"
 )
 
 func main(){
@@ -24,11 +24,7 @@ func main(){
 		fmt.Println("拒绝了")
 	}
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+	r := routes.InitRouter()
+
+	r.Run(":" + config.PORT) // 监听并在 0.0.0.0:8050 上启动服务
 }
