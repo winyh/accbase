@@ -8,6 +8,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"accbase/app/Models"
+	"reflect"
 	"time"
 )
 
@@ -20,6 +21,7 @@ type Admins struct {
 
 func Ping(c *gin.Context) {
 	e := casbin.NewEnforcer("./casbin/model.conf", "./casbin/policy.csv")
+	fmt.Println(reflect.TypeOf(e))
 
 	sub := "alice" // the user that wants to access a resource.
 	obj := "data1" // the resource that is going to be accessed.

@@ -17,6 +17,10 @@ func InitApi(r *gin.Engine){
 		v1.POST("/user/delete", Controllers.UserDestroy)
 		v1.POST("/user/update", Controllers.UserUpdate)
 		v1.GET("/users", Controllers.UserFindAll)
+
+		v1.GET("/roles", Controllers.GetAllRoles) // 获取所有角色
+		v1.POST("/addRoleForUser", Controllers.AddRoleForUser) // 为用户添加角色
+		v1.POST("/addNamedPolicy", Controllers.AddNamedPolicy) //向当前命名策略添加授权规则
 	}
 
 }

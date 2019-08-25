@@ -6,7 +6,7 @@ require (
 	github.com/appleboy/gin-jwt v2.5.0+incompatible // indirect
 	github.com/casbin/casbin v1.9.1
 	github.com/casbin/casbin/v2 v2.0.1
-	github.com/casbin/gorm-adapter v1.0.0 // indirect
+	github.com/casbin/gorm-adapter v1.0.0
 	github.com/casbin/gorm-adapter/v2 v2.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.4.0
