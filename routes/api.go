@@ -18,6 +18,8 @@ func InitApi(r *gin.Engine){
 		v1.POST("/user/update", Controllers.UserUpdate)
 		v1.GET("/users", Controllers.UserFindAll)
 
+		v1.POST("/upload", Controllers.FileUpload) // 文件上传
+
 		v1.GET("/subjects", Controllers.GetAllSubjects) // 获取主题列表 [包含用户和角色]
 		v1.GET("/objects", Controllers.GetAllObjects) // 获取对象列表 [资源 或操作 对象]
 		v1.GET("/roles", Controllers.GetAllRoles) // 获取所有角色
