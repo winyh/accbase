@@ -26,6 +26,10 @@ func InitApi(r *gin.Engine){
 		v1.GET("/policy", Controllers.GetPolicy) // 获取策略中的所有授权规则
 		v1.POST("/addRoleForUser", Controllers.AddRoleForUser) // 为用户添加角色
 		v1.POST("/addNamedPolicy", Controllers.AddNamedPolicy) //向当前命名策略添加授权规则
+
+		v1.POST("/deleteUser", Controllers.DeleteUser) // 删除用户
+		v1.POST("/deleteRole", Controllers.DeleteRole) // 删除角色
+		v1.POST("/deletePermissionForUser", Controllers.DeletePermissionForUser) // 删除权限
 	}
 
 }

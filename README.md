@@ -29,6 +29,8 @@
 | member  | 会员表 |
 | staff  | 员工表 |
 
+> 用户只有在 g 组才被视为用户？
+
 #### API 归类
 |  功能  | action  | API  | 描述 |
 |  ----  | ---- | ----  | ---- |
@@ -37,4 +39,9 @@
 | 获取对象数组 | GET | /api/objects | 获取所有的对象（资源或api路径）|
 | 获取策略中授权规则 | POST | /api/policy | 获取所有的授权规则（sub can obj）|
 | 为用户添加角色 | POST | /api/addRoleForUser | 为用户添加角色 |
+| 为当前策略添加授权规则 | POST | /api/addNamedPolicy | 向当前命名策略添加授权规则|
+| 删除用户 | POST | /api/deleteUser | 删除用户，只有在g 组 里才被视为用户，否则也可能是资源|
+| 删除角色 | POST | /api/deleteRole | 删除角色 |
+| 删除指定用户权限 | POST | /api/deletePermissionForUser | 删除指定用户权限 |
+
 

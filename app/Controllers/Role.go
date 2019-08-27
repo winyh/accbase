@@ -80,7 +80,7 @@ func AddRoleForUser(c *gin.Context){
 }
 
 
-func AddNamedPolicy(c *gin.Context){
+func AddNamedPolicy(c *gin.Context) {
 	var msg string
 	var json PoliceUserRoleObjectAction
 	err := c.BindJSON(&json)
@@ -98,6 +98,74 @@ func AddNamedPolicy(c *gin.Context){
 		msg = "添加成功！"
 	} else {
 		msg = "添加失败！"
+	}
+
+	c.JSON(200, gin.H{
+		"status": true,
+		"message":msg,
+	})
+}
+
+func DeleteUser(c *gin.Context){
+	var msg string
+	var json PoliceUserRoleObjectAction
+	err := c.BindJSON(&json)
+
+	if err != nil {
+		fmt.Printf("mysql connect error %v", err)
+		return
+	}
+	res := Enforcer.DeleteUser(json.User)
+	if res {
+		msg = "删除成功！"
+	} else {
+		msg = "删除失败！"
+	}
+
+	c.JSON(200, gin.H{
+		"status": true,
+		"message":msg,
+	})
+}
+
+func DeleteRole(c *gin.Context){
+	var msg string
+	var json PoliceUserRoleObjectAction
+	err := c.BindJSON(&json)
+
+	if err != nil {
+		fmt.Printf("mysql connect error %v", err)
+		return
+	}
+	// res := Enforcer.DeleteRole(json.Role) 这个方法无返回值
+	Enforcer.DeleteRole(json.Role)
+	//if res {
+	//	msg = "删除成功！"
+	//} else {
+	//	msg = "删除失败！"
+	//}
+
+	c.JSON(200, gin.H{
+		"status": true,
+		"message":msg,
+	})
+}
+
+func DeletePermissionForUser(c *gin.Context){
+	var msg string
+	var json PoliceUserRoleObjectAction
+	err := c.BindJSON(&json)
+
+	if err != nil {
+		fmt.Printf("mysql connect error %v", err)
+		return
+	}
+	fmt.Println(json.User, json.Action)
+	res := Enforcer.DeletePermissionForUser(json.User, json.Action)
+	if res {
+		msg = "删除成功！"
+	} else {
+		msg = "删除失败！"
 	}
 
 	c.JSON(200, gin.H{
