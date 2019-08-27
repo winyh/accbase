@@ -30,6 +30,11 @@
 | staff  | 员工表 |
 
 #### API 归类
-|  功能   | API  |
-|  ----  | ----  |
-| 角色管理  | /api/roles | 
+|  功能  | action  | API  | 描述 |
+|  ----  | ---- | ----  | ---- |
+| 获取角色数组 | GET | /api/roles | 获取所有的角色 |
+| 获取主体数组 | GET | /api/subjects | 获取所有的主体（用户或资源）|
+| 获取对象数组 | GET | /api/objects | 获取所有的对象（资源或api路径）|
+| 获取策略中授权规则 | POST | /api/policy | 获取所有的授权规则（sub can obj）|
+| 为用户添加角色 | POST | /api/addRoleForUser | 为用户添加角色 |
+
