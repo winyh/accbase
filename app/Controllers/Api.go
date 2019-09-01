@@ -72,7 +72,7 @@ func GetToken(c *gin.Context)  {
 	})
 }
 
-func UserInfo(c *gin.Context)  {
+func AdminUserInfo(c *gin.Context)  {
 	hmacSampleSecret := []byte("my_secret_key")
 	tokenString := c.Request.Header.Get("token")
 	// tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJuYmYiOjE0NDQ0Nzg0MDB9.-BRTwjN-sAlUjO-82qDrNHdMtGAwgWH05PrN49Ep_sU"
@@ -104,7 +104,7 @@ func UserInfo(c *gin.Context)  {
 	}
 }
 
-func UserCreate(c *gin.Context) {
+func AdminUserCreate(c *gin.Context) {
 	var json  Models.Admins
 	err := c.BindJSON(&json)
 
@@ -127,7 +127,7 @@ func UserCreate(c *gin.Context) {
 	})
 }
 
-func UserDestroy(c *gin.Context)  {
+func AdminUserDestroy(c *gin.Context)  {
 	var json  Models.Admins
 	err := c.BindJSON(&json)
 	if err != nil {
@@ -143,7 +143,7 @@ func UserDestroy(c *gin.Context)  {
 	})
 }
 
-func UserUpdate(c *gin.Context) {
+func AdminUserUpdate(c *gin.Context) {
 	var json  Models.Admins
 	err := c.BindJSON(&json)
 
@@ -166,7 +166,7 @@ func UserUpdate(c *gin.Context) {
 	})
 }
 
-func UserFindAll(c *gin.Context)  {
+func AdminUserFindAll(c *gin.Context)  {
 	var json  Models.Admins
 	err := c.BindJSON(&json)
 

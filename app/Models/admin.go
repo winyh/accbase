@@ -7,10 +7,19 @@ import (
 
 type Admins struct {
 	gorm.Model
-	Name string `json:"name"  binding:"required"`
+	UserName string `json:"user_name"  binding:"required"`
+	NickName string `json:"nick_name"  binding:"required"`
 	Password string `json:"password"  binding:"required"`
-	Mobile string `json:"mobile" binding:"required"`
+	Telephone string `json:"telephone" binding:"required"`
+	Email string `json:"email" binding:"required"`
+	Qq string `json:"qq" binding:"required"`
+	Department int `json:"department" binding:"required"`
 }
+
+func init(){
+	DB.AutoMigrate(&Admins{})
+}
+
 
 // Insert 新增admin用户
 func (admin *Admins) Insert() (userID uint, err error) {
