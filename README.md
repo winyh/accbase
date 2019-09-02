@@ -25,13 +25,13 @@
 #### 数据表
 |  数据表   | 描述  | 
 |  ----  | ----  |
-| admin  | 管理员表 |
+| admins  | 管理员表 |
 | member  | 会员表 |
 | staff  | 员工表 |
 
 > 用户只有在 g 组才被视为用户？
 
-#### API 归类
+#### 权限API 归类
 |  功能  | action  | API  | 描述 |
 |  ----  | ---- | ----  | ---- |
 | 获取角色数组 | GET | /api/roles | 获取所有的角色 |
@@ -43,5 +43,24 @@
 | 删除用户 | POST | /api/deleteUser | 删除用户，只有在g 组 里才被视为用户，否则也可能是资源|
 | 删除角色 | POST | /api/deleteRole | 删除角色 |
 | 删除指定用户权限 | POST | /api/deletePermissionForUser | 删除指定用户权限 |
+
+
+
+#### Token API 归类
+|  功能  | action  | API  | 描述 |
+|  ----  | ---- | ----  | ---- |
+| 获取token | POST | /api/token | 根据{username,email}获取token |
+| 根据token获取用户信息 | GET | /api/user | 获取指定后台用户|
+
+
+#### 后台用户管理API 归类
+|  功能  | action  | API  | 描述 |
+|  ----  | ---- | ----  | ---- |
+| 新增后台用户 | POST | /api/admin/user | 新增后台用户 |
+| 删除后台用户 | DELETE | /api/admin/user | 删除后台用户 |
+| 修改后台用户 | PATCH | /api/admin/user | 修改后台用户 |
+| 获取所有后台用户 | GET | /api/admin/users | 获取所有后台用户|
+| 根据id获取指定后台用户信息 | GET | /api/admin/user/:id | id获取指定后台用户|
+
 
 

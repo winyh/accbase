@@ -1,22 +1,18 @@
 package Controllers
 
 import (
+	"accbase/app/Models"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 	"github.com/casbin/casbin"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 	"net/http"
-	"accbase/app/Models"
 	"reflect"
 	"time"
 )
 
 type Admins struct {
-	gorm.Model
-	Name string `json:"name"  binding:"required"`
-	Password string `json:"password"  binding:"required"`
-	Mobile string `json:"mobile" binding:"required"`
+	Models.Admins
 }
 
 func Ping(c *gin.Context) {
@@ -70,6 +66,38 @@ func GetToken(c *gin.Context)  {
 	c.JSON(200, gin.H{
 		"token": tokenString,
 	})
+}
+
+func UserInfo(c *gin.Context)  {
+	hmacSampleSecret := []byte("my_secret_key")
+	tokenString := c.Request.Header.Get("token")
+	// tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJuYmYiOjE0NDQ0Nzg0MDB9.-BRTwjN-sAlUjO-82qDrNHdMtGAwgWH05PrN49Ep_sU"
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+
+		// Don't forget to validate the alg is what you expect:
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		}
+
+		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
+		return hmacSampleSecret, nil
+	})
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		fmt.Println(claims["username"], claims["nbf"])
+
+		c.JSON(200, gin.H{
+			"username": claims["username"],
+			"password": claims["password"],
+		})
+
+	} else {
+		fmt.Println(err)
+		c.JSON(200, gin.H{
+			"message": "获取失败！",
+		})
+	}
 }
 
 func AdminUserInfo(c *gin.Context)  {

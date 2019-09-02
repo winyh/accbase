@@ -12,11 +12,15 @@ func InitApi(r *gin.Engine){
 	{
 		v1.GET("/ping", Controllers.Ping)
 		v1.POST("/token", Controllers.GetToken)
-		v1.POST("/admin/user/info", Controllers.AdminUserInfo)
-		v1.POST("/admin/user/create", Controllers.AdminUserCreate)
-		v1.POST("/admin/user/delete", Controllers.AdminUserDestroy)
-		v1.POST("/admin/user/update", Controllers.AdminUserUpdate)
+		v1.POST("/user", Controllers.UserInfo)
+
+		// 后台用户的操作
+		v1.GET("/admin/user/:id", Controllers.AdminUserInfo)
+		v1.POST("/admin/user", Controllers.AdminUserCreate)
+		v1.DELETE("/admin/user", Controllers.AdminUserDestroy)
+		v1.PATCH("/admin/user", Controllers.AdminUserUpdate)
 		v1.GET("/admin/users", Controllers.AdminUserFindAll)
+
 
 		v1.POST("/upload", Controllers.FileUpload) // 文件上传
 
