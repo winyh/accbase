@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/role.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/role.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="149">
+              <first_editor relative-caret-position="319">
                 <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
               </first_editor>
               <second_editor />
@@ -86,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Models/role.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+            <state relative-caret-position="165">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
               <folding>
                 <element signature="e#16#74#0" expanded="true" />
               </folding>
@@ -164,11 +162,11 @@
         <option value="$PROJECT_DIR$/app/Controllers/Admin.go" />
         <option value="$PROJECT_DIR$/app/Controllers/Api.go" />
         <option value="$PROJECT_DIR$/app/Models/admin.go" />
-        <option value="$PROJECT_DIR$/app/Models/role.go" />
         <option value="$PROJECT_DIR$/app/Controllers/Role.go" />
         <option value="$PROJECT_DIR$/routes/api.go" />
         <option value="$PROJECT_DIR$/app/Controllers/AdminRole.go" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/Models/role.go" />
       </list>
     </option>
   </component>
@@ -256,12 +254,12 @@
     <frame x="17" y="39" width="1400" height="776" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49610895" visible="true" weight="0.2179676" />
-      <window_info id="Structure" order="1" sideWeight="0.50389105" side_tool="true" visible="true" weight="0.2179676" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49557522" visible="true" weight="0.2179676" />
+      <window_info id="Structure" order="1" sideWeight="0.50442475" side_tool="true" visible="true" weight="0.2179676" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24853802" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24853802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991228" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -269,7 +267,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.17397662" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17397662" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -474,16 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/role.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding>
-            <element signature="e#16#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/Role.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
@@ -547,10 +535,20 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="149">
+          <first_editor relative-caret-position="319">
             <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/role.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#16#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

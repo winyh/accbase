@@ -7,9 +7,9 @@ import (
 
 type Role struct {
 	gorm.Model
-	RoleName string `json"roleName" binding:"required"`
+	RoleName string `json"roleName" binding:"required"` // 这里约定的是前台传值
 	Description string `json"description" binding:"required"`
-	Status string `json"status"`
+	Status int `json"status"`
 }
 
 func init()  {
