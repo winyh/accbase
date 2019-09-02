@@ -21,6 +21,13 @@ func InitApi(r *gin.Engine){
 		v1.PATCH("/admin/user/:id", Controllers.AdminUserUpdate)
 		v1.GET("/admin/users", Controllers.AdminUserFindAll)
 
+		// 后台用户角色的操作
+		v1.GET("/admin/role/:id", Controllers.RoleInfo)
+		v1.POST("/admin/role", Controllers.RoleCreate)
+		v1.DELETE("/admin/role/:id", Controllers.RoleDestroy)
+		v1.PATCH("/admin/role/:id", Controllers.RoleUpdate)
+		v1.GET("/admin/roles", Controllers.RoleFindAll)
+
 
 		v1.POST("/upload", Controllers.FileUpload) // 文件上传
 

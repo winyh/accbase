@@ -57,10 +57,19 @@
 |  功能  | action  | API  | 描述 |
 |  ----  | ---- | ----  | ---- |
 | 新增后台用户 | POST | /api/admin/user | 新增后台用户 |
-| 删除后台用户 | DELETE | /api/admin/user | 删除后台用户 |
-| 修改后台用户 | PATCH | /api/admin/user | 修改后台用户 |
+| 删除后台用户 | DELETE | /api/admin/user/:id | 删除后台用户 |
+| 修改后台用户 | PATCH | /api/admin/user/:id | 修改后台用户 |
 | 获取所有后台用户 | GET | /api/admin/users | 获取所有后台用户|
 | 根据id获取指定后台用户信息 | GET | /api/admin/user/:id | id获取指定后台用户|
 
+
+#### 后台用户角色API 归类
+|  功能  | action  | API  | 描述 |
+|  ----  | ---- | ----  | ---- |
+| 新增后台用户角色 | POST | /api/admin/role | 新增后台角色 |
+| 删除后台用户角色 | DELETE | /api/admin/role/:id | 删除后台角色 |
+| 修改后台用户角色 | PATCH | /api/admin/role/:id | 修改后台角色 |
+| 获取所有后台用户角色 | GET | /api/admin/roles | 获取所有后台角色 |
+| 根据id获取指定后台用户角色信息 | GET | /api/admin/role/:id | id获取指定后台角色 |
 
 
