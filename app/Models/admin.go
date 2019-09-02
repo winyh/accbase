@@ -1,8 +1,8 @@
 package Models
 
 import (
-	"github.com/jinzhu/gorm"
 	. "accbase/database"
+	"github.com/jinzhu/gorm"
 )
 
 type Admins struct {
@@ -52,8 +52,19 @@ func (admin *Admins) Update(id int64) (user Admins, err error) {
 	return
 }
 
+// FindOne 查询指定id admin用户
+func (admin *Admins) FindOne(id int) (user Admins, err error) {
 
-// FindOne 查询admin用户
+	result := DB.Where("username = ?", "winyh").First(&admin)
+
+	if result.Error != nil {
+		err = result.Error
+		return
+	}
+	return
+}
+
+// FindAll 查询所有admin用户
 func (admin *Admins) FindAll() (admins []Admins, err error) {
 
 	result := DB.Find(&admins) // 这里的 &admins 跟返回参数要一致

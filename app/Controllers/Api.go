@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"reflect"
+	"strconv"
 	"time"
 )
 
@@ -101,35 +102,28 @@ func UserInfo(c *gin.Context)  {
 }
 
 func AdminUserInfo(c *gin.Context)  {
-	hmacSampleSecret := []byte("my_secret_key")
-	tokenString := c.Request.Header.Get("token")
-	// tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJuYmYiOjE0NDQ0Nzg0MDB9.-BRTwjN-sAlUjO-82qDrNHdMtGAwgWH05PrN49Ep_sU"
+	var json  Models.Admins
+	paramId := c.Param("id")
+	id, _ := strconv.Atoi(paramId)
 
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-
-		// Don't forget to validate the alg is what you expect:
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
-		}
-
-		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
-		return hmacSampleSecret, nil
-	})
-
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		fmt.Println(claims["username"], claims["nbf"])
-
-		c.JSON(200, gin.H{
-			"username": claims["username"],
-			"password": claims["password"],
-		})
-
-	} else {
-		fmt.Println(err)
-		c.JSON(200, gin.H{
-			"message": "获取失败！",
-		})
+	admin, err := json.FindOne(id)
+	if err != nil {
+		fmt.Printf("mysql connect error %v", err)
 	}
+
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "抱歉未找到相关信息",
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"status": true,
+		"data": admin,
+		"message":"查询成功",
+	})
 }
 
 func AdminUserCreate(c *gin.Context) {
@@ -196,13 +190,8 @@ func AdminUserUpdate(c *gin.Context) {
 
 func AdminUserFindAll(c *gin.Context)  {
 	var json  Models.Admins
-	err := c.BindJSON(&json)
 
-	if err != nil {
-		fmt.Printf("mysql connect error %v", err)
-	}
-
-	result, err := json.FindAll()
+	admin, err := json.FindAll()
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -214,7 +203,7 @@ func AdminUserFindAll(c *gin.Context)  {
 
 	c.JSON(200, gin.H{
 		"status": true,
-		"data": result,
+		"data": admin,
 		"message":"查询成功",
 	})
 }
