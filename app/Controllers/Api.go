@@ -138,7 +138,6 @@ func AdminUserCreate(c *gin.Context) {
 
 	if err != nil {
 		fmt.Printf("database error %v", err)
-		fmt.Printf("database error %v", id)
 		return
 	}
 
@@ -151,17 +150,21 @@ func AdminUserCreate(c *gin.Context) {
 
 func AdminUserDestroy(c *gin.Context)  {
 	var json  Models.Admins
-	err := c.BindJSON(&json)
-	if err != nil {
-		fmt.Printf("mysql connect error %v", err)
-		return
-	}
+	var msg string
+	paramId := c.Param("id")
+	id, _ := strconv.Atoi(paramId)
 
-	json.Destroy()
+	err := json.Destroy(id)
+
+	if err != nil{
+		msg = "删除失败"
+	} else {
+		msg = "删除成功"
+	}
 
 	c.JSON(200, gin.H{
 		"status": true,
-		"message":"删除成功",
+		"message": msg,
 	})
 }
 

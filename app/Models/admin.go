@@ -25,7 +25,7 @@ func init(){
 func (admin *Admins) Insert() (userID uint, err error) {
 
 	result := DB.Create(&admin)
-	userID = admin.ID
+	userID = admin.ID // 返回值
 	if result.Error != nil {
 		err = result.Error
 	}
@@ -33,9 +33,8 @@ func (admin *Admins) Insert() (userID uint, err error) {
 }
 
 // Destroy 删除admin用户
-func (admin *Admins) Destroy() (err error) {
-
-	result := DB.Delete(&admin)
+func (admin *Admins) Destroy(id int) (err error) {
+	result := DB.Where(`id = ?`, id).Delete(&admin) // 删除记录时，请确保主键字段有值，GORM 会通过主键去删除记录，如果主键为空，GORM 会删除该 model 的所有记录。
 	if result.Error != nil {
 		err = result.Error
 	}
@@ -55,8 +54,7 @@ func (admin *Admins) Update(id int64) (user Admins, err error) {
 // FindOne 查询指定id admin用户
 func (admin *Admins) FindOne(id int) (user Admins, err error) {
 
-	result := DB.Where("username = ?", "winyh").First(&admin)
-
+	result := DB.First(&admin, id)
 	if result.Error != nil {
 		err = result.Error
 		return
