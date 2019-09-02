@@ -18,7 +18,7 @@ func InitApi(r *gin.Engine){
 		v1.GET("/admin/user/:id", Controllers.AdminUserInfo)
 		v1.POST("/admin/user", Controllers.AdminUserCreate)
 		v1.DELETE("/admin/user/:id", Controllers.AdminUserDestroy)
-		v1.PATCH("/admin/user", Controllers.AdminUserUpdate)
+		v1.PATCH("/admin/user/:id", Controllers.AdminUserUpdate)
 		v1.GET("/admin/users", Controllers.AdminUserFindAll)
 
 

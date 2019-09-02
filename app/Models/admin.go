@@ -43,7 +43,9 @@ func (admin *Admins) Destroy(id int) (err error) {
 
 
 // Update 修改admin用户
-func (admin *Admins) Update(id int64) (user Admins, err error) {
+func (admin *Admins) Update(id int) (err error) {
+	// fmt.Println(&admin)
+	// fmt.Printf("%+v", admin.UserName) 可以通过获取结构体里的 值获取 body 里的参数
 	result := DB.Model(&admin).Where("id = ?", id).Updates(&admin)
 	if result.Error != nil {
 		err = result.Error
@@ -55,6 +57,7 @@ func (admin *Admins) Update(id int64) (user Admins, err error) {
 func (admin *Admins) FindOne(id int) (user Admins, err error) {
 
 	result := DB.First(&admin, id)
+	user = *admin
 	if result.Error != nil {
 		err = result.Error
 		return

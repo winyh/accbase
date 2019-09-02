@@ -170,24 +170,28 @@ func AdminUserDestroy(c *gin.Context)  {
 
 func AdminUserUpdate(c *gin.Context) {
 	var json  Models.Admins
-	err := c.BindJSON(&json)
+	var msg string
+	paramId := c.Param("id")
+	id, _ := strconv.Atoi(paramId)
 
-	if err != nil {
-		fmt.Printf("mysql connect error %v", err)
+	c.BindJSON(&json)
+
+	err := json.Update(id)
+
+	if err != nil{
+		msg = "更新失败"
+	} else {
+		msg = "更新成功"
 	}
-
-	id, err := json.Update(3)
 
 	if err != nil {
 		fmt.Printf("database error %v", err)
-		fmt.Printf("database error %v", id)
 		return
 	}
 
 	c.JSON(200, gin.H{
 		"status": true,
-		"id":id,
-		"message":"更新成功",
+		"message": msg,
 	})
 }
 
