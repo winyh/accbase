@@ -1,17 +1,17 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	"accbase/app/Controllers"
+	. "accbase/app/Middleware"
+	"github.com/gin-gonic/gin"
 )
 
 func InitApi(r *gin.Engine){
 
 	// 简单的api路由组: v1
-	v1 := r.Group("/api")
+	v1 := r.Group("/api", Auth())
 	{
 		v1.GET("/ping", Controllers.Ping)
-		v1.POST("/token", Controllers.GetToken)
 		v1.POST("/user", Controllers.UserInfo)
 
 		// 后台用户的操作
