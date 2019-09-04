@@ -41,10 +41,10 @@ func Auth() gin.HandlerFunc {
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			fmt.Println(claims["username"], claims["nbf"])
 
-			c.JSON(200, gin.H{
-				"username": claims["username"],
-				"password": claims["password"],
-			})
+			//c.JSON(200, gin.H{
+			//	"username": claims["username"],
+			//	"password": claims["password"],
+			//}) // 鉴权通过后不打印信息
 
 		} else {
 			fmt.Println(err)
