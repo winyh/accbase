@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Controllers/Api.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Middleware/Auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/Middleware/Auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/admin.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,11 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controllers/Api.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1844">
-              <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+            <state relative-caret-position="243">
+              <caret line="139" column="21" lean-forward="true" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
               <folding>
                 <element signature="e#21#189#0" expanded="true" />
               </folding>
@@ -39,20 +37,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/admin.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+            <state relative-caret-position="309">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
                 <element signature="e#16#74#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Middleware/Auth.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="50" column="30" lean-forward="true" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -103,9 +92,9 @@
         <option value="$PROJECT_DIR$/routes/web.go" />
         <option value="$PROJECT_DIR$/app/Models/role.go" />
         <option value="$PROJECT_DIR$/app/Controllers/AdminRole.go" />
-        <option value="$PROJECT_DIR$/app/Controllers/Api.go" />
-        <option value="$PROJECT_DIR$/app/Models/admin.go" />
         <option value="$PROJECT_DIR$/app/Middleware/Auth.go" />
+        <option value="$PROJECT_DIR$/app/Models/admin.go" />
+        <option value="$PROJECT_DIR$/app/Controllers/Api.go" />
       </list>
     </option>
   </component>
@@ -138,13 +127,7 @@
               <item name="accbase" type="b2602c69:ProjectViewProjectNode" />
               <item name="accbase" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="accbase" type="b2602c69:ProjectViewProjectNode" />
-              <item name="accbase" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -465,10 +448,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Middleware/Auth.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/admin.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="309">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
             <element signature="e#16#74#0" expanded="true" />
           </folding>
@@ -477,18 +467,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/Api.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1844">
-          <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+        <state relative-caret-position="243">
+          <caret line="139" column="21" lean-forward="true" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
           <folding>
             <element signature="e#21#189#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Middleware/Auth.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="50" column="30" lean-forward="true" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
         </state>
       </provider>
     </entry>

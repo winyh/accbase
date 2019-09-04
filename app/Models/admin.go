@@ -78,9 +78,9 @@ func (admin *Admins) FindAll() (admins []Admins, err error) {
 }
 
 //  核查用户名是否唯一
-func (admin *Admins) CheckUnique(userName string) ( err error) {
+func (admin *Admins) CheckUnique(userName string) (err error) {
 
-	result := DB.Where("user_name = ?", userName).Find(&admin)
+	result := DB.Where("user_name = ?", userName).First(&admin)
 
 	if result.Error != nil {
 		err = result.Error

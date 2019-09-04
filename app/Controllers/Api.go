@@ -134,10 +134,10 @@ func AdminUserCreate(c *gin.Context) {
 		fmt.Printf("mysql connect error %v", err)
 	}
 
-	fail := json.CheckUnique("赵佳")
+	fail := json.CheckUnique(json.UserName)
 
-
-	if fail == nil {
+	fmt.Println(fail)
+	if fail == nil  {
 		c.JSON(200, gin.H{
 			"status": false,
 			"message":"当前用户名被占用",
