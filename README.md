@@ -73,3 +73,9 @@
 | 根据id获取指定后台用户角色信息 | GET | /api/admin/role/:id | id获取指定后台角色 |
 
 
+> 这个提交主要是为了记录下突破 go micro 了， 顿悟...哈哈哈哈
+
+Api  是对外提供restful. api 服务的 -> 直接调用的是 srv
+内部调用 是 客户端去访问 服务端
+
+直接 /rpc 调用的时候会绕过 restful. api（但是 micro api 网关是必须启动的，网关也可配置） -> 直接调用srv (http请求 会自动转成 rpc调用)
