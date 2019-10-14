@@ -4,6 +4,34 @@
 
 ##### 项目目标，先熟悉Casbin ，然后将本项目改造成：身份认证+用户权限访问控制微服务
 
+#### 项目结构
+
+基本是参照 PHP Laravel 框架
+
+`app` 应用目录（包含 控制器 中间件和模型目录）
+
+`casbin` casbin 库配置目录
+
+`config` 配置目录
+
+`database` 数据库目录
+
+`public` 前端公共资源目录
+
+`routes` 路由目录
+
+`views` 项目模板目录
+
+`.env` 项目配置文件
+
+`go.mod` [项目依赖管理](https://github.com/golang/go/wiki/Modules)
+
+`go.sum` 项目依赖管理
+
+`main.go` 项目入口
+
+
+
 #### 项目下载
 克隆项目到 go 的 [工作目录](http://docscn.studygolang.com/doc/code.html) src
 
