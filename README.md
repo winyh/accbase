@@ -5,7 +5,7 @@
 ##### 项目目标，先熟悉Casbin ，然后将本项目改造成：身份认证+用户权限访问控制微服务
 
 #### 项目下载
-克隆项目到 go 的 [工作目录](http://docscn.studygolang.com/doc/code.html)
+克隆项目到 go 的 [工作目录](http://docscn.studygolang.com/doc/code.html) src
 
 #### 代理设置
 
@@ -15,6 +15,37 @@
 
 
 也可以参照这个[设置](https://github.com/goproxy/goproxy.cn) 
+
+#### 数据库设置
+
+DB, err = gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/casbin?charset=utf8&parseTime=True&loc=Local&timeout=10ms")
+
+root是本地数据库账号， 123456 是你的本地数据库密码
+
+casbin 是数据库名， 项目运行时会自动创建 数据库casbin 和 数据表。数据库名也可以自定义
+
+#### 本地配置文件
+
+在项目根目录新建 .env 文件，这个文件在项目运行时会自动读取相关配置
+
+.env 文件内容如下
+```
+HTTP_PORT = 8070
+```
+
+#### 项目运行
+
+在项目根目录执行 `go run main.go` 会自动下载依赖
+
+`127.0.0.1:8070` 端口就可以访问到项目了
+
+例如：
+`127.0.0.1:8070/api/ping`
+
+
+#### 运行端口修改
+
+可以修改 .env 文件里配置的端口号
 
 
 #### 功能点
