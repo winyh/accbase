@@ -17,10 +17,13 @@
 也可以参照这个[设置](https://github.com/goproxy/goproxy.cn) 
 
 #### 数据库设置
+项目根目录下的 config/config.go 文件，修改数据库初始化配置
 
+```
 DB, err = gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/casbin?charset=utf8&parseTime=True&loc=Local&timeout=10ms")
+```
 
-root是本地数据库账号， 123456 是你的本地数据库密码
+root 是本地数据库账号， 123456 是你的本地数据库密码
 
 casbin 是数据库名， 项目运行时会自动创建 数据库casbin 和 数据表。数据库名也可以自定义
 
