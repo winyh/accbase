@@ -4,6 +4,19 @@
 
 ##### 项目目标，先熟悉Casbin ，然后将本项目改造成：身份认证+用户权限访问控制微服务
 
+#### 项目下载
+克隆项目到 go 的 [工作目录](http://docscn.studygolang.com/doc/code.html)
+
+#### 代理设置
+
+> 不设置代理很多包拉取不到，原因你懂的
+
+参考阿里云的 [代理设置](http://mirrors.aliyun.com/goproxy/) 
+
+
+也可以参照这个[设置](https://github.com/goproxy/goproxy.cn) 
+
+
 #### 功能点
 |  功能   | 描述  |
 |  ----  | ----  | 

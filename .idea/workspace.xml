@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/about/index.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/views/about/index.tmpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/index.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/index.tmpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home/index.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/views/home/index.tmpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/post/index.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/views/post/index.tmpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user/index.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/index.tmpl" afterDir="false" />
-    </list>
+    <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,53 +9,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controllers/Api.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
-              <folding>
-                <element signature="e#21#189#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/admin.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
-              <folding>
-                <element signature="e#16#74#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-              <folding>
-                <element signature="e#14#118#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/home/index.tmpl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,29 +73,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="accbase" type="b2602c69:ProjectViewProjectNode" />
-              <item name="accbase" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="accbase" type="b2602c69:ProjectViewProjectNode" />
-              <item name="accbase" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="accbase" type="b2602c69:ProjectViewProjectNode" />
-              <item name="accbase" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -207,10 +133,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="39" width="1400" height="776" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6340996" visible="true" weight="0.23858616" />
-      <window_info id="Structure" order="1" sideWeight="0.3659004" side_tool="true" visible="true" weight="0.23858616" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.63131315" visible="true" weight="0.24226804" />
+      <window_info id="Structure" order="1" sideWeight="0.36868685" side_tool="true" visible="true" weight="0.24226804" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
@@ -272,13 +197,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.env" />
     <entry file="file://$PROJECT_DIR$/app/Controllers/Post.go">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -295,10 +214,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/upload/微服务.jpg" />
     <entry file="file://$PROJECT_DIR$/casbin/policy.csv">
-      <provider editor-type-id="text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="45">
           <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="27" />
