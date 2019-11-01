@@ -16,6 +16,8 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 
 `api` : Restful api 接口实现
 
+`cli` : cli 服务调用
+
 `cmd` : main函数文件目录
 
 `configs`: 项目配置
