@@ -1,95 +1,52 @@
 package main
 
 import (
+	auth "accbase/srv/auth/proto"
 	"context"
-	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/web"
+	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/errors"
 	"log"
 )
 
-type Say struct{}
-
-var (
-	cl hello.SayService
-)
-
-
-// 用户注册分发token
-func register(){
-
+type Auth struct {
+	Client auth.AuthService
 }
 
-// 用户登录分发token
-func login(){
+func (a *Auth) Hello(ctx context.Context, req *auth.LoginRequest, rsp *auth.LoginResponse) error {
+	log.Print("Received Auth.Login API request")
 
-}
-
-// 用户退出登录
-func logout(){
-
-}
-
-// 刷新令牌
-func refreshToken(){
-
-}
-
-// 	获取用户信息,根据token获取
-func getUserInfo(){
-
-}
-
-// 	获取用户角色集合
-func getUserRoles(){
-
-}
-
-
-func (s *Say) Anything(c *gin.Context) {
-	log.Print("Received Say.Anything API request")
-	c.JSON(200, map[string]string{
-		"message": "Hi, this is the Greeter API",
-	})
-}
-
-func (s *Say) Hello(c *gin.Context) {
-	log.Print("Received Say.Hello API request")
-
-	name := c.Param("name")
-
-	response, err := cl.Hello(context.TODO(), &hello.Request{
-		Name: name,
-	})
-
-	if err != nil {
-		c.JSON(500, err)
+	name := req.GetUserName()
+	if len(name) == 0 {
+		return errors.BadRequest("go.micro.api.auth", "Name cannot be blank")
 	}
 
-	c.JSON(200, response)
+	response, err := a.Client.Login(ctx, &auth.LoginRequest{
+		UserName: "winyh",
+		Password: "123456",
+	})
+
+	log.Print(response)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func main()  {
-	// Create service
-	service := web.NewService(
-		web.Name("go.micro.api.user"),
+func main() {
+	service := micro.NewService(
+		micro.Name("go.micro.api.auth"),
 	)
 
 	service.Init()
 
-	// setup Greeter Server Client
-	cl = hello.NewSayService("go.micro.srv.user", client.DefaultClient)
+	_ = service.Server().Handle(
+		service.Server().NewHandler(
+			&Auth{Client: auth.NewAuthService("go.micro.srv.auth", service.Client())},
+		),
+	)
 
-	// Create RESTful handler (using Gin)
-	say := new(Say)
-	router := gin.Default()
-	router.GET("/api/user", say.Anything)
-	router.GET("/api/user/:id", say.Hello)
-
-	// Register Handler
-	service.Handle("/", router)
-
-	// Run server
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
 	}

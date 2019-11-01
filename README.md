@@ -8,8 +8,9 @@
 - [依赖](#依赖)
 - [Usage](#usage)
 
+## 生成 proto 文件 (GOPATH 目录里执行)
 
-protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/test/test.proto
+protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/proto/auth.proto
 
 ## 目录说明
 
@@ -19,8 +20,7 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/test/test.proto
 
 `configs`: 项目配置
     
-    model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制）
-    policy 是 Casbin的策略配置
+> model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制） policy.csv 是 Casbin的策略配置
 
 `go.mod` : 项目依赖管理
 

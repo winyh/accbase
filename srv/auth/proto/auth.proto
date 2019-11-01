@@ -3,13 +3,26 @@ syntax = "proto3";
 package auth;
 
 service Auth {
-    rpc Hello(HelloRequest) returns (HelloResponse) {}
+    rpc Login(LoginRequest) returns (LoginResponse) {}
+    rpc Register(RegisterRequest) returns (RegisterResponse) {}
 }
 
-message HelloRequest {
-    string name = 1;
+message LoginRequest {
+    string userName = 1;
+    string password = 2;
 }
 
-message HelloResponse {
-    string greeting = 2;
+message LoginResponse {
+    string token = 1;
+}
+
+message RegisterRequest {
+    string userName = 1;
+    string email = 2;
+    string password = 3;
+    string verifyPassword = 4;
+}
+
+message RegisterResponse {
+    string token = 1;
 }
