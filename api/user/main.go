@@ -14,6 +14,38 @@ var (
 	cl hello.SayService
 )
 
+
+// 用户注册分发token
+func register(){
+
+}
+
+// 用户登录分发token
+func login(){
+
+}
+
+// 用户退出登录
+func logout(){
+
+}
+
+// 刷新令牌
+func refreshToken(){
+
+}
+
+// 	获取用户信息,根据token获取
+func getUserInfo(){
+
+}
+
+// 	获取用户角色集合
+func getUserRoles(){
+
+}
+
+
 func (s *Say) Anything(c *gin.Context) {
 	log.Print("Received Say.Anything API request")
 	c.JSON(200, map[string]string{

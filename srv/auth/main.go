@@ -4,6 +4,10 @@ import (
 	"github.com/micro/go-micro"
 )
 
+func createToken()  {
+
+}
+
 func main(){
 	service := micro.NewService(
 		micro.Name("go.micro.srv.auth"),
