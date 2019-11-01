@@ -1,31 +1,32 @@
-# Go micro Casbin Gin Gorm JWT 用户认证权限系统微服务
+# Go micro 用户认证权限系统微服务
 
-这是一个基于 Go Micro 的用户认证和权限的微服务
+这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
-```
-micro new test --namespace=go.micro --type=srv
-```
+## 开始
 
-## Getting Started
-
-- [Configuration](#configuration)
-- [Dependencies](#dependencies)
+- [目录说明](#目录说明)
+- [依赖](#依赖)
 - [Usage](#usage)
 
 
 protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/test/test.proto
 
-## Configuration
+## 目录说明
 
-- FQDN: go.micro.srv.test
-- Type: srv
-- Alias: test
+`api` : Restful api 接口实现
 
-## Dependencies
+`cmd` : main函数文件目录
 
-Micro services depend on service discovery. The default is multicast DNS, a zeroconf system.
+`configs`: 项目配置
 
-In the event you need a resilient multi-host setup we recommend consul.
+`go.mod` : 项目依赖管理
+
+`Dockerfile` : Docker 文件
+
+`README.md` : 说明文档
+
+## 依赖
+consul 服务发现
 
 ```
 # install consul
@@ -35,19 +36,11 @@ brew install consul
 consul agent -dev
 ```
 
-## Usage
+## 使用
 
-A Makefile is included for convenience
-
-Build the binary
-
+运行服务
 ```
-make build
-```
-
-Run the service
-```
-./test-srv
+go run cmd/main.go
 ```
 
 Build a docker image
