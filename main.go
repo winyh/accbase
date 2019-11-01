@@ -1,30 +1,35 @@
 package main
 
 import (
-	"accbase/config"
-	"fmt"
-	// "github.com/casbin/casbin"
-	_ "accbase/config"
-	"accbase/routes"
+	"github.com/micro/go-micro/util/log"
+	"github.com/micro/go-micro"
+	"test/handler"
+	"test/subscriber"
+
+	test "test/proto/test"
 )
 
-func main(){
+func main() {
+	// New Service
+	service := micro.NewService(
+		micro.Name("go.micro.srv.test"),
+		micro.Version("latest"),
+	)
 
-	fmt.Println(config.PORT)
+	// Initialise service
+	service.Init()
 
-	//e := casbin.NewEnforcer("./casbin/model.conf", "./casbin/policy.csv")
-	//
-	//sub := "alice" // the user that wants to access a resource.
-	//obj := "data1" // the resource that is going to be accessed.
-	//act := "write" // the operation that the user performs on the resource.
-	//
-	//if e.Enforce(sub, obj, act) == true {
-	//	fmt.Println("进入了")
-	//} else {
-	//	fmt.Println("拒绝了")
-	//}
+	// Register Handler
+	test.RegisterTestHandler(service.Server(), new(handler.Test))
 
-	r := routes.InitRouter()
+	// Register Struct as Subscriber
+	micro.RegisterSubscriber("go.micro.srv.test", service.Server(), new(subscriber.Test))
 
-	r.Run(":" + config.PORT) // 监听并在 0.0.0.0:8050 上启动服务
+	// Register Function as Subscriber
+	micro.RegisterSubscriber("go.micro.srv.test", service.Server(), subscriber.Handler)
+
+	// Run service
+	if err := service.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
