@@ -12,7 +12,7 @@ type Auth struct {
 	Client auth.AuthService
 }
 
-func (a *Auth) Hello(ctx context.Context, req *auth.LoginRequest, rsp *auth.LoginResponse) error {
+func (a *Auth) Login(ctx context.Context, req *auth.LoginRequest, rsp *auth.LoginResponse) error {
 	log.Print("Received Auth.Login API request")
 
 	name := req.GetUserName()
