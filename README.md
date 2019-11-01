@@ -1,8 +1,6 @@
-# Test Service
+# Go micro Casbin Gin Gorm JWT 用户认证权限系统微服务
 
-This is the Test service
-
-Generated with
+这是一个基于 Go Micro 的用户认证和权限的微服务
 
 ```
 micro new test --namespace=go.micro --type=srv
