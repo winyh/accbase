@@ -18,6 +18,9 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/test/test.proto
 `cmd` : main函数文件目录
 
 `configs`: 项目配置
+    
+    model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制）
+    policy 是 Casbin的策略配置
 
 `go.mod` : 项目依赖管理
 
