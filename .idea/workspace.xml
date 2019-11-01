@@ -2,37 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/About.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Admin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/AdminRole.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Api.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Home.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Post.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Role.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/User.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Middleware/Auth.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/admin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/role.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/casbin/model.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/casbin/policy.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/mysql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/consul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/about/index.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/index.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home/index.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/post/index.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user/index.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/test.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subscriber/test.go" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,13 +24,6 @@
         <option value="Go File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>Admins</find>
-      <find>UserCreate</find>
-      <find>PRIMARY</find>
-    </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
@@ -79,7 +50,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -136,7 +107,7 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-    <proxy>direct</proxy>
+    <proxy>https://goproxy.cn</proxy>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
