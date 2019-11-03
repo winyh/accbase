@@ -43,7 +43,7 @@ consul agent -dev
 
 ## 使用
 
-进入到项目根目录
+进入到项目根目录(默认使用 mdns 服务发现)
 
 运行srv服务
 ```
@@ -70,11 +70,78 @@ micro api --handler=api --enable_rpc
 micro web
 ```
 
+## 调用示例
+默认账号密码：
+
+```
+userName:"winyh"
+
+password:"123456"
+```
+
+/auth/auth/register 注册
+```
+Action:POST
+URL: http://localhost:8080/auth/auth/register
+Content-Type:x-www-form-urlencoded
+
+Params:
+userName:"winyh",
+password:"123456",
+verifyPassword:"123456"
+
+Response:
+{
+    "message": "注册成功！",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiMTIzNDU2IiwidXNlcm5hbWUiOiJ3aW55aCJ9.1UKdHGY_f6eXIxOJbvU3rW-nHkO_ZAMB9O8nXuCQka8"
+}
+
+```
+
+/auth/auth/login 登录
+```
+Action:POST
+URL: http://localhost:8080/auth/auth/login
+Content-Type:x-www-form-urlencoded
+
+Params:
+userName:"winyh",
+password:"123456"
+
+Response:
+{
+    "message": "登录成功！",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiMTIzNDU2IiwidXNlcm5hbWUiOiJ3aW55aCJ9.1UKdHGY_f6eXIxOJbvU3rW-nHkO_ZAMB9O8nXuCQka8"
+}
+
+```
+
+/rpc 直接调用
+   ```
+   Action:POST
+   URL: http://localhost:8080/rpc 
+   
+   Params:
+   {
+   	"service":"go.micro.srv.auth",
+   	"method":"Auth.Login",
+   	"request":{
+   		"userName":"winyh"
+   	}
+   }
+   
+   Response:
+   {
+       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiIiwidXNlcm5hbWUiOiJ3aW55aCJ9.kDEBDzrP1yXbzFZ52q-BK7PZYEK_KBphnthOO9zFK9c"
+   }
+   
+   ```
+
 
 
 Todo List
-1. 用户注册，获取token ❌
-2. 用户登录，获取token ❌
+1. 用户注册，获取token 
+2. 用户登录，获取token 
 3. 根据token，获取用户信息 ❌
 4. 根据token，获取用户角色集合 ❌
 5. 用户新增角色 ❌
@@ -82,6 +149,8 @@ Todo List
 7. 角色的增删改查 ❌
 8. 权限的增删改查 ❌
 9. 系统所有的角色列表 ❌
+10. 完成 docker 自动部署 ❌
+11. 项目开发思路详细说明 ❌
 
 ## 注意事项
 1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
