@@ -1,156 +1,157 @@
-# accbase
+# Go micro 用户认证权限系统微服务
 
-> 基于 Casbin 实现访问控制：Golang + Gin + Gorm + Casbin + JWT
+这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
-##### 项目目标，先熟悉Casbin ，然后将本项目改造成：身份认证+用户权限访问控制微服务
+## 开始
 
-#### 项目结构
+- [目录说明](#目录说明)
+- [依赖](#依赖)
+- [使用](#使用)
 
-基本是参照 PHP Laravel 框架
+## 生成 proto 文件 (GOPATH/src 目录里执行)
 
-`app` 应用目录（包含 控制器 中间件和模型目录）
+protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/proto/auth.proto
 
-`casbin` casbin 库配置目录
+## 目录说明
 
-`config` 配置目录
+`api` : Restful api 接口实现
 
-`database` 数据库目录
+`cli` : cli 服务调用
 
-`public` 前端公共资源目录
+`cmd` : main函数文件目录
 
-`routes` 路由目录
+`configs`: 项目配置
+    
+> model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制） policy.csv 是 Casbin的策略配置
 
-`views` 项目模板目录
+`go.mod` : 项目依赖管理
 
-`.env` 项目配置文件
+`Dockerfile` : Docker 文件
 
-`go.mod` [项目依赖管理](https://github.com/golang/go/wiki/Modules)
+`README.md` : 说明文档
 
-`go.sum` 项目依赖管理
-
-`main.go` 项目入口
-
-
-
-#### 项目下载
-克隆项目到 go 的 [工作目录](http://docscn.studygolang.com/doc/code.html) src
-
-#### 代理设置
-
-> 不设置代理很多包拉取不到，原因你懂的
-
-参考阿里云的 [代理设置](http://mirrors.aliyun.com/goproxy/) 
-
-
-也可以参照这个[设置](https://github.com/goproxy/goproxy.cn) 
-
-#### 数据库设置
-项目根目录下的 config/config.go 文件，修改数据库初始化配置
+## 依赖
+consul 服务发现
 
 ```
-DB, err = gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/casbin?charset=utf8&parseTime=True&loc=Local&timeout=10ms")
+# install consul
+brew install consul
+
+# run consul
+consul agent -dev
 ```
 
-root 是本地数据库账号， 123456 是你的本地数据库密码
+## 使用
 
-casbin 是数据库名， 项目运行时会自动创建 数据库casbin 和 数据表。数据库名也可以自定义
+进入到项目根目录(默认使用 mdns 服务发现)
 
-#### 本地配置文件
-
-在项目根目录新建 .env 文件，这个文件在项目运行时会自动读取相关配置
-
-.env 文件内容如下
+运行srv服务
 ```
-HTTP_PORT = 8070
+go run srv/auth/main.go
 ```
 
-#### 项目运行
+运行cli测试返回
+```
+go run cli/main.go
+```
 
-在项目根目录执行 `go run main.go` 会自动下载依赖
+运行api服务
+```
+go run srv/user/api.go
+```
 
-`127.0.0.1:8070` 端口就可以访问到项目了
+运行micro api 网关服务
+```
+micro api --handler=api --enable_rpc
+```
 
-例如：
-`127.0.0.1:8070/api/ping`
+运行micro web 控制台面板
+```
+micro web
+```
 
+## 调用示例
+默认账号密码：
 
-#### 运行端口修改
+```
+userName:"winyh"
 
-可以修改 .env 文件里配置的端口号
+password:"123456"
+```
 
+/auth/auth/register 注册
+```
+Action:POST
+URL: http://localhost:8080/auth/auth/register
+Content-Type:x-www-form-urlencoded
 
-#### 功能点
-|  功能   | 描述  |
-|  ----  | ----  | 
-| 角色管理  | 角色的CURD |
-| 用户服务  | 用户的CURD |
-| 用户认证  | 登录注册授权认证 |
+Params:
+userName:"winyh",
+password:"123456",
+verifyPassword:"123456"
 
-#### 系统预置角色
+Response:
+{
+    "message": "注册成功！",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiMTIzNDU2IiwidXNlcm5hbWUiOiJ3aW55aCJ9.1UKdHGY_f6eXIxOJbvU3rW-nHkO_ZAMB9O8nXuCQka8"
+}
 
-|  角色   | 描述  | 
-|  ----  | ----  |
-| admin  | 管理员 |
-| member  | 会员 |
-| staff  | 员工 |
-| finance  | 财务人员 |
-| editor  | 编辑 |
-| operation  | 运营人员 |
+```
 
-#### 数据表
-|  数据表   | 描述  | 
-|  ----  | ----  |
-| admins  | 管理员表 |
-| member  | 会员表 |
-| staff  | 员工表 |
+/auth/auth/login 登录
+```
+Action:POST
+URL: http://localhost:8080/auth/auth/login
+Content-Type:x-www-form-urlencoded
 
-> 用户只有在 g 组才被视为用户？
+Params:
+userName:"winyh",
+password:"123456"
 
-#### 权限API 归类
-|  功能  | action  | API  | 描述 |
-|  ----  | ---- | ----  | ---- |
-| 获取角色数组 | GET | /api/roles | 获取所有的角色 |
-| 获取主体数组 | GET | /api/subjects | 获取所有的主体（用户或资源）|
-| 获取对象数组 | GET | /api/objects | 获取所有的对象（资源或api路径）|
-| 获取策略中授权规则 | POST | /api/policy | 获取所有的授权规则（sub can obj）|
-| 为用户添加角色 | POST | /api/addRoleForUser | 为用户添加角色 |
-| 为当前策略添加授权规则 | POST | /api/addNamedPolicy | 向当前命名策略添加授权规则|
-| 删除用户 | POST | /api/deleteUser | 删除用户，只有在g 组 里才被视为用户，否则也可能是资源|
-| 删除角色 | POST | /api/deleteRole | 删除角色 |
-| 删除指定用户权限 | POST | /api/deletePermissionForUser | 删除指定用户权限 |
+Response:
+{
+    "message": "登录成功！",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiMTIzNDU2IiwidXNlcm5hbWUiOiJ3aW55aCJ9.1UKdHGY_f6eXIxOJbvU3rW-nHkO_ZAMB9O8nXuCQka8"
+}
 
+```
 
-
-#### Token API 归类
-|  功能  | action  | API  | 描述 |
-|  ----  | ---- | ----  | ---- |
-| 获取token | POST | /api/token | 根据{username,email}获取token |
-| 根据token获取用户信息 | GET | /api/user | 获取指定后台用户|
-
-
-#### 后台用户管理API 归类
-|  功能  | action  | API  | 描述 |
-|  ----  | ---- | ----  | ---- |
-| 新增后台用户 | POST | /api/admin/user | 新增后台用户 |
-| 删除后台用户 | DELETE | /api/admin/user/:id | 删除后台用户 |
-| 修改后台用户 | PATCH | /api/admin/user/:id | 修改后台用户 |
-| 获取所有后台用户 | GET | /api/admin/users | 获取所有后台用户|
-| 根据id获取指定后台用户信息 | GET | /api/admin/user/:id | id获取指定后台用户|
-
-
-#### 后台用户角色API 归类
-|  功能  | action  | API  | 描述 |
-|  ----  | ---- | ----  | ---- |
-| 新增后台用户角色 | POST | /api/admin/role | 新增后台角色 |
-| 删除后台用户角色 | DELETE | /api/admin/role/:id | 删除后台角色 |
-| 修改后台用户角色 | PATCH | /api/admin/role/:id | 修改后台角色 |
-| 获取所有后台用户角色 | GET | /api/admin/roles | 获取所有后台角色 |
-| 根据id获取指定后台用户角色信息 | GET | /api/admin/role/:id | id获取指定后台角色 |
+/rpc 直接调用
+   ```
+   Action:POST
+   URL: http://localhost:8080/rpc 
+   
+   Params:
+   {
+   	"service":"go.micro.srv.auth",
+   	"method":"Auth.Login",
+   	"request":{
+   		"userName":"winyh"
+   	}
+   }
+   
+   Response:
+   {
+       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiIiwidXNlcm5hbWUiOiJ3aW55aCJ9.kDEBDzrP1yXbzFZ52q-BK7PZYEK_KBphnthOO9zFK9c"
+   }
+   
+   ```
 
 
-> 这个提交主要是为了记录下突破 go micro 了， 顿悟...哈哈哈哈
 
-Api  是对外提供restful. api 服务的 -> 直接调用的是 srv
-内部调用 是 客户端去访问 服务端
+Todo List
+1. 用户注册，获取token ✅
+2. 用户登录，获取token ✅
+3. 根据token，获取用户信息 ✅
+4. 根据token，获取用户角色集合 ❌
+5. 用户新增角色 ❌
+6. 角色新增权限 ❌
+7. 角色的增删改查 ❌
+8. 权限的增删改查 ❌
+9. 系统所有的角色列表 ❌
+10. 完成 docker 自动部署 ❌
+11. 项目开发思路详细说明 ❌
 
-直接 /rpc 调用的时候会绕过 restful. api（但是 micro api 网关是必须启动的，网关也可配置） -> 直接调用srv (http请求 会自动转成 rpc调用)
+## 注意事项
+1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
+2. 直接 `/rpc` 调用服务时，开启 `micro api --handle=api --enable_rpc` 一定要加上 --enable_rpc 参数，否则返回 500 错误 
