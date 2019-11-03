@@ -8,7 +8,7 @@
 - [依赖](#依赖)
 - [使用](#使用)
 
-## 生成 proto 文件 (GOPATH 目录里执行)
+## 生成 proto 文件 (GOPATH/src 目录里执行)
 
 protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/proto/auth.proto
 
@@ -140,9 +140,9 @@ Response:
 
 
 Todo List
-1. 用户注册，获取token 
-2. 用户登录，获取token 
-3. 根据token，获取用户信息 ❌
+1. 用户注册，获取token ✅
+2. 用户登录，获取token ✅
+3. 根据token，获取用户信息 ✅
 4. 根据token，获取用户角色集合 ❌
 5. 用户新增角色 ❌
 6. 角色新增权限 ❌

@@ -88,6 +88,31 @@ func (a *Auth) Login(ctx context.Context, req *api.Request, rsp *api.Response) e
 	return nil
 }
 
+func (a *Auth) UserInfo(ctx context.Context, req *api.Request, rsp *api.Response) error {
+	log.Print("Received Auth.UserInfo API request")
+	token, ok := req.Get["token"]
+	if !ok || len(token.Values) == 0 {
+		return errors.BadRequest("go.micro.api.auth", "Token cannot be blank")
+	}
+
+	response, err := a.Client.UserInfo(ctx, &auth.UserInfoRequest{
+		Token:  strings.Join(token.Values, ""),
+	})
+
+	if err != nil {
+		return err
+	}
+
+	rsp.StatusCode = 200
+	b, _ := json.Marshal(map[string]string{
+		"message":"请求成功！",
+		"userName": response.UserName,
+	})
+	rsp.Body = string(b)
+
+	return nil
+}
+
 func main() {
 
 	service := micro.NewService(
