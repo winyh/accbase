@@ -6,7 +6,7 @@
 
 - [目录说明](#目录说明)
 - [依赖](#依赖)
-- [Usage](#usage)
+- [使用](#使用)
 
 ## 生成 proto 文件 (GOPATH 目录里执行)
 
@@ -15,6 +15,8 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 ## 目录说明
 
 `api` : Restful api 接口实现
+
+`cli` : cli 服务调用
 
 `cmd` : main函数文件目录
 
@@ -41,15 +43,34 @@ consul agent -dev
 
 ## 使用
 
-运行服务
+进入到项目根目录
+
+运行srv服务
 ```
-go run cmd/main.go
+go run srv/auth/main.go
 ```
 
-Build a docker image
+运行cli测试返回
 ```
-make docker
+go run cli/main.go
 ```
+
+运行api服务
+```
+go run srv/user/api.go
+```
+
+运行micro api 网关服务
+```
+micro api --handler=api --enable_rpc
+```
+
+运行micro web 控制台面板
+```
+micro web
+```
+
+
 
 Todo List
 1. 用户注册，获取token ❌
@@ -61,3 +82,7 @@ Todo List
 7. 角色的增删改查 ❌
 8. 权限的增删改查 ❌
 9. 系统所有的角色列表 ❌
+
+## 注意事项
+1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
+2. 直接 `/rpc` 调用服务时，开启 `micro api --handle=api --enable_rpc` 一定要加上 --enable_rpc 参数，否则返回 500 错误 

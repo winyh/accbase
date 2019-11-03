@@ -31,6 +31,7 @@ func (a *Auth)Register(ctx context.Context, req *auth.RegisterRequest, rsp *auth
 }
 
 func (a *Auth)Login(ctx context.Context, req *auth.LoginRequest, rsp *auth.LoginResponse) error{
+	fmt.Println("收到请求！")
 	userName := req.UserName
 	password := req.Password
 	if userName != "winyh" || password != "123456" {
