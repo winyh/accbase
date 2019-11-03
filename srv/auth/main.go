@@ -43,6 +43,21 @@ func (a *Auth)Login(ctx context.Context, req *auth.LoginRequest, rsp *auth.Login
 	return nil
 }
 
+func (a *Auth)UserInfo(ctx context.Context, req *auth.UserInfoRequest, rsp *auth.UserInfoResponse) error{
+	fmt.Println("收到请求！")
+	token := req.Token
+	if token != "" {
+		fmt.Println("请检查token是否为空！")
+	}
+	b, name := VerifyToken(token)
+
+	if b {
+		rsp.UserName = name
+	}
+
+	return nil
+}
+
 func CreateToken(userName string, password string) string {
 
 	hmacSampleSecret := []byte("my_secret_key")
@@ -54,6 +69,36 @@ func CreateToken(userName string, password string) string {
 	tokenString, err := token.SignedString(hmacSampleSecret)
 	fmt.Println(tokenString, err)
 	return tokenString
+}
+
+func VerifyToken(tokenString string) (bool, string) {
+	var name string
+	hmacSampleSecret := []byte("my_secret_key")
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		// Don't forget to validate the alg is what you expect:
+		//if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+		//	return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		//}
+
+		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
+		return hmacSampleSecret, nil
+	})
+
+	if err != nil{
+		log.Print("请检查 token 参数！")
+		return false, name
+	}
+
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		fmt.Println(claims["username"], claims["nbf"])
+		name = claims["username"].(string)
+	} else {
+		fmt.Println(err)
+		return false, name
+	}
+
+	return true, name
 }
 
 func main(){
