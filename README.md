@@ -24,6 +24,8 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
     
 > model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制） policy.csv 是 Casbin的策略配置
 
+`database`: 数据库配置(gorm)
+
 `go.mod` : 项目依赖管理
 
 `Dockerfile` : Docker 文件
