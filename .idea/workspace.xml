@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9445a0b5-df98-4b62-803d-97889bae1d53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accbase/srv/auth/proto/auth.micro.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accbase/srv/auth/proto/auth.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/auth/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/auth/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/auth/proto/auth.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/auth/proto/auth.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/auth/proto/auth.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/auth/proto/auth.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/auth/proto/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/srv/auth/proto/auth.proto" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

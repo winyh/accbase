@@ -6,6 +6,7 @@ service Auth {
     rpc Login(LoginRequest) returns (LoginResponse) {}
     rpc Register(RegisterRequest) returns (RegisterResponse) {}
     rpc UserInfo(UserInfoRequest) returns (UserInfoResponse) {}
+    rpc Roles(RoleRequest) returns (RoleResponse) {}
 }
 
 message LoginRequest {
@@ -16,6 +17,7 @@ message LoginRequest {
 message LoginResponse {
     string token = 1;
 }
+
 
 message RegisterRequest {
     string userName = 1;
@@ -28,10 +30,19 @@ message RegisterResponse {
     string token = 1;
 }
 
+
 message UserInfoRequest {
     string token = 1;
 }
 
 message UserInfoResponse {
     string userName = 1;
+}
+
+message RoleRequest {
+    string token = 1;
+}
+
+message RoleResponse {
+    string roles = 1;
 }

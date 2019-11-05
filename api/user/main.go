@@ -113,6 +113,28 @@ func (a *Auth) UserInfo(ctx context.Context, req *api.Request, rsp *api.Response
 	return nil
 }
 
+func (a *Auth) Roles(ctx context.Context, req *api.Request, rsp *api.Response) error {
+	token, ok := req.Post["token"]
+	if !ok || len(token.Values) == 0 {
+		return errors.BadRequest("go.micro.api.auth", "Token cannot be blank")
+	}
+	response, err := a.Client.Roles(ctx, &auth.RoleRequest{
+		Token: strings.Join(token.Values, ""),
+	})
+	if err != nil {
+		return err
+	}
+
+	rsp.StatusCode = 200
+	b, _ := json.Marshal(map[string]string{
+		"message":"请求成功！",
+		"userRoles": string(response.Roles[:]),
+	})
+	rsp.Body = string(b)
+
+	return nil
+}
+
 func main() {
 
 	service := micro.NewService(
