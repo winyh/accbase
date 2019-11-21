@@ -37,6 +37,7 @@ type AuthService interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...client.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...client.CallOption) (*RegisterResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...client.CallOption) (*UserInfoResponse, error)
+	Roles(ctx context.Context, in *RoleRequest, opts ...client.CallOption) (*RoleResponse, error)
 }
 
 type authService struct {
@@ -87,12 +88,23 @@ func (c *authService) UserInfo(ctx context.Context, in *UserInfoRequest, opts ..
 	return out, nil
 }
 
+func (c *authService) Roles(ctx context.Context, in *RoleRequest, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "Auth.Roles", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Auth service
 
 type AuthHandler interface {
 	Login(context.Context, *LoginRequest, *LoginResponse) error
 	Register(context.Context, *RegisterRequest, *RegisterResponse) error
 	UserInfo(context.Context, *UserInfoRequest, *UserInfoResponse) error
+	Roles(context.Context, *RoleRequest, *RoleResponse) error
 }
 
 func RegisterAuthHandler(s server.Server, hdlr AuthHandler, opts ...server.HandlerOption) error {
@@ -100,6 +112,7 @@ func RegisterAuthHandler(s server.Server, hdlr AuthHandler, opts ...server.Handl
 		Login(ctx context.Context, in *LoginRequest, out *LoginResponse) error
 		Register(ctx context.Context, in *RegisterRequest, out *RegisterResponse) error
 		UserInfo(ctx context.Context, in *UserInfoRequest, out *UserInfoResponse) error
+		Roles(ctx context.Context, in *RoleRequest, out *RoleResponse) error
 	}
 	type Auth struct {
 		auth
@@ -122,4 +135,8 @@ func (h *authHandler) Register(ctx context.Context, in *RegisterRequest, out *Re
 
 func (h *authHandler) UserInfo(ctx context.Context, in *UserInfoRequest, out *UserInfoResponse) error {
 	return h.AuthHandler.UserInfo(ctx, in, out)
+}
+
+func (h *authHandler) Roles(ctx context.Context, in *RoleRequest, out *RoleResponse) error {
+	return h.AuthHandler.Roles(ctx, in, out)
 }

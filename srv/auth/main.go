@@ -4,11 +4,17 @@ import (
 	auth "accbase/srv/auth/proto"
 	"context"
 	"fmt"
+	"github.com/casbin/casbin"
+	"github.com/casbin/gorm-adapter"
 	"github.com/dgrijalva/jwt-go"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/go-micro"
 	"log"
 	"time"
 )
+
+var Adapter = gormadapter.NewAdapter("mysql", "root:123456@tcp(127.0.0.1:3306)/casbin", true)
+var Enforcer = casbin.NewEnforcer("../../configs/model.conf", Adapter)
 
 type Auth struct{}
 
@@ -99,6 +105,12 @@ func VerifyToken(tokenString string) (bool, string) {
 	}
 
 	return true, name
+}
+
+func (a *Auth)Roles(ctx context.Context, req *auth.RoleRequest, rsp *auth.RoleResponse) error{
+	allRoles := Enforcer.GetAllRoles()
+	rsp.Roles = allRoles[0]
+	return nil
 }
 
 func main(){

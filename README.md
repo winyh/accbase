@@ -1,5 +1,7 @@
 # Go micro 用户认证权限系统微服务
 
+![](https://img.shields.io/github/issues/winyh/accbase) ![](https://img.shields.io/github/languages/code-size/winyh/accbase) ![](https://img.shields.io/github/stars/winyh/accbase) ![](https://img.shields.io/github/last-commit/winyh/accbase)
+
 这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
 ## 开始
