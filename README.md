@@ -1,7 +1,18 @@
-# Go micro 用户认证权限系统微服务
+<p align="center">
+  <a href="https://winyh.github.io/accbase/">
+    <img width="200" src="https://github.com/winyh/accbase/blob/master/public/gopher.svg">
+  </a>
+</p>
 
-![](https://img.shields.io/github/issues/winyh/accbase) ![](https://img.shields.io/github/languages/code-size/winyh/accbase) ![](https://img.shields.io/github/stars/winyh/accbase) ![](https://img.shields.io/github/last-commit/winyh/accbase)
+<h1 align="center">Accbase</h1>
 
+<p align="center">基于微服务的用户认证和权限的管理平台  代号：土拨鼠</p>
+
+<div align="center">
+
+![](https://img.shields.io/github/issues/winyh/accbase) ![](https://img.shields.io/github/languages/code-size/winyh/accbase) ![](https://img.shields.io/github/watch/winyh/accbase) ![](https://img.shields.io/github/stars/winyh/accbase) ![](https://img.shields.io/github/last-commit/winyh/accbase)
+
+</div> 
 这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
 ## 开始
@@ -35,15 +46,19 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 `README.md` : 说明文档
 
 ## 依赖
-consul 服务发现
+etcd 服务发现
 
 ```
-# install consul
-brew install consul
+# install etcd
+go get -v go.etcd.io/etcd
 
-# run consul
-consul agent -dev
+go get -v go.etcd.io/etcd/etcdctl
 ```
+etcd 启动
+
+```
+etcd
+``` 
 
 ## 使用
 
@@ -159,3 +174,5 @@ Todo List
 ## 注意事项
 1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
 2. 直接 `/rpc` 调用服务时，开启 `micro api --handle=api --enable_rpc` 一定要加上 --enable_rpc 参数，否则返回 500 错误 
+___________________________
+3.版本升级到了 micro@1.16.0 / go-micro@1.16.0
