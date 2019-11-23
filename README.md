@@ -27,23 +27,22 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 
 ## 目录说明
 
-`api` : Restful api 接口实现
-
-`cli` : cli 服务调用
-
-`cmd` : main函数文件目录
-
-`configs`: 项目配置
-    
-> model.conf 是 Casbin的模型配置（当前模式是RBAC基于角色的访问控制） policy.csv 是 Casbin的策略配置
-
-`database`: 数据库配置(gorm)
-
-`go.mod` : 项目依赖管理
-
-`Dockerfile` : Docker 文件
-
-`README.md` : 说明文档
+```
+├── api                                        // Restful api 接口实现
+├── cli                                        // cli 服务调用
+├── cmd                                        // main函数文件目录
+├── configs                                    // 项目配置
+|   |—— model.conf                             // Casbin的模型配置（当前模式是RBAC基于角色的访问控制） 
+|   |—— policy.csv                             // Casbin的策略配置
+|—— database                                   // 数据库配置(gorm)
+├── public                                     // 静态资源目录
+|   |—— gopher.svg                             // logo 
+|—— srv                                        // 数据库配置(gorm)
+|   |—— auth                                   // auth srv 服务 
+|—— go.mod                                     // 项目依赖管理
+|—— Dockerfile                                 // Docker 文件
+|—— README.md                                  // 说明文档
+```
 
 ## 依赖
 etcd 服务发现
