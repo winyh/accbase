@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://winyh.github.io/accbase/">
-    <img width="200" src="https://github.com/winyh/accbase/blob/master/public/gopher.svg">
+    <img width="300" src="https://github.com/winyh/accbase/blob/master/public/gopher.svg">
   </a>
 </p>
 
