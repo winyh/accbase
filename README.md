@@ -15,6 +15,11 @@
 </div> 
 这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
+
+### 基本原理图(重点理解聚合层)
+
+![](https://github.com/winyh/accbase/blob/master/public/tech.png)
+
 ## 开始
 
 - [目录说明](#目录说明)
@@ -75,7 +80,7 @@ go run cli/main.go
 
 运行api服务
 ```
-go run srv/user/api.go
+go run api/user/main.go
 ```
 
 运行micro api 网关服务
