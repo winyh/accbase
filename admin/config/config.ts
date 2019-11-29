@@ -1,15 +1,13 @@
 import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
+
 import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
-
-const { pwa } = defaultSettings;
-
-// preview.pro.ant.design only do not use in your production ;
+const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
-
 const plugins: IPlugin[] = [
   [
     'umi-plugin-react',
@@ -85,6 +83,24 @@ export default {
           path: '/user/login',
           component: './user/login',
         },
+        {
+          name: '登录页',
+          icon: 'smile',
+          path: '/userlogin',
+          component: './UserLogin',
+        },
+        {
+          name: '注册结果页',
+          icon: 'smile',
+          path: '/userregisterresult',
+          component: './UserRegisterResult',
+        },
+        {
+          name: '注册页',
+          icon: 'smile',
+          path: '/userregister',
+          component: './UserRegister',
+        },
       ],
     },
     {
@@ -114,6 +130,24 @@ export default {
               authority: ['admin'],
             },
             {
+              name: '404',
+              icon: 'smile',
+              path: '/exception/404',
+              component: './Exception404',
+            },
+            {
+              name: '500',
+              icon: 'smile',
+              path: '/exception/500',
+              component: './Exception500',
+            },
+            {
+              name: '403',
+              icon: 'smile',
+              path: '/exception/403',
+              component: './Exception403',
+            },
+            {
               component: './404',
             },
           ],
@@ -123,7 +157,6 @@ export default {
         },
       ],
     },
-
     {
       component: './404',
     },
@@ -174,8 +207,7 @@ export default {
   },
   manifest: {
     basePath: '/',
-  },
-  // chainWebpack: webpackPlugin,
+  }, // chainWebpack: webpackPlugin,
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',

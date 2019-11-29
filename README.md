@@ -33,6 +33,7 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 ## 目录说明
 
 ```
+├── admin                                      // 后台管理界面
 ├── api                                        // Restful api 接口实现
 ├── cli                                        // cli 服务调用
 ├── cmd                                        // main函数文件目录
@@ -92,6 +93,10 @@ micro api --handler=api --enable_rpc
 ```
 micro web
 ```
+
+## 管理界面
+
+请查看 [管理界面](https://github.com/winyh/accbase/tree/master/admin/README.md)
 
 ## 调用示例
 默认账号密码：
