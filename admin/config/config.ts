@@ -98,7 +98,7 @@ export default {
         {
           name: '注册页',
           icon: 'smile',
-          path: '/userregister',
+          path: '/user/register',
           component: './UserRegister',
         },
       ],
@@ -146,6 +146,63 @@ export default {
               icon: 'smile',
               path: '/exception/403',
               component: './Exception403',
+            },
+            {
+              name: 'list',
+              icon: 'smile',
+              path: '/listtablelist',
+              component: './ListTableList',
+            },
+            {
+              name: 'sms',
+              icon: 'user',
+              path: '/sms',
+              routes: [
+                {
+                  name: 'userlist',
+                  path: '/sms/userlist',
+                  component: './user/list',
+                },
+                {
+                  name: 'rolelist',
+                  path: '/sms/rolelist',
+                  component: './user/role',
+                },
+              ],
+            },
+            {
+              name: 'power',
+              icon: 'safety-certificate',
+              path: '/power',
+              routes: [
+                {
+                  name: 'powerlist',
+                  path: '/power/powerlist',
+                  component: './user/power',
+                },
+                {
+                  name: 'menulist',
+                  path: '/power/menulist',
+                  component: './user/menu',
+                },
+              ],
+            },
+            {
+              name: 'system',
+              icon: 'appstore',
+              path: '/system',
+              routes: [
+                {
+                  name: 'info',
+                  path: '/system/info',
+                  component: './user/power',
+                },
+                {
+                  name: 'loglist',
+                  path: '/system/loglist',
+                  component: './user/menu',
+                },
+              ],
             },
             {
               component: './404',

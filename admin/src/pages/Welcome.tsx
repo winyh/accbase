@@ -17,7 +17,7 @@ export default (): React.ReactNode => (
   <PageHeaderWrapper>
     <Card>
       <Alert
-        message="umi ui 现已发布，欢迎使用 npm run ui 启动体验。"
+        message="Accbase 是基于 Go-micro Casbin Gorm JWT 开发，以微服务的方式构建权限管理系统"
         type="success"
         showIcon
         banner
@@ -27,36 +27,14 @@ export default (): React.ReactNode => (
         }}
       />
       <Typography.Text strong>
-        <a target="_blank" rel="noopener noreferrer" href="https://pro.ant.design/docs/block">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/winyh/accbase">
           <FormattedMessage
             id="app.welcome.link.block-list"
-            defaultMessage="基于 block 开发，快速构建标准页面"
+            defaultMessage="基于 Go-micro Casbin Gorm 开发，以微服务的方式构建权限管理系统"
           />
         </a>
       </Typography.Text>
-      <CodePreview>npx umi block list</CodePreview>
-      <Typography.Text
-        strong
-        style={{
-          marginBottom: 12,
-        }}
-      >
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://pro.ant.design/docs/available-script#npm-run-fetchblocks"
-        >
-          <FormattedMessage id="app.welcome.link.fetch-blocks" defaultMessage="获取全部区块" />
-        </a>
-      </Typography.Text>
-      <CodePreview> npm run fetch:blocks</CodePreview>
+      <CodePreview>git clone https://github.com/winyh/accbase</CodePreview>
     </Card>
-    <p style={{ textAlign: 'center', marginTop: 24 }}>
-      Want to add more pages? Please refer to{' '}
-      <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-        use block
-      </a>
-      。
-    </p>
   </PageHeaderWrapper>
 );

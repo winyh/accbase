@@ -57,7 +57,10 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter
+          copyright="2019 winyh"
+          links={[{ title: 'accbase', href: 'https://github.com/winyh/accbase', key: 'accbase' }]}
+        />
       </div>
     </>
   );
