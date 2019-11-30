@@ -1,4 +1,4 @@
-import { Card, Table } from 'antd';
+import { Card, Table, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
@@ -52,7 +52,31 @@ const data = [
         children: [
           {
             key: 121,
-            name: 'Jimmy Brown',
+            name: '研发部门',
+            age: 16,
+            address: 'New York No. 3 Lake Park',
+          },
+          {
+            key: 121,
+            name: '市场部门',
+            age: 16,
+            address: 'New York No. 3 Lake Park',
+          },
+          {
+            key: 121,
+            name: '运维部门',
+            age: 16,
+            address: 'New York No. 3 Lake Park',
+          },
+          {
+            key: 121,
+            name: '财务部门',
+            age: 16,
+            address: 'New York No. 3 Lake Park',
+          },
+          {
+            key: 121,
+            name: '总裁办',
             age: 16,
             address: 'New York No. 3 Lake Park',
           },
@@ -114,6 +138,9 @@ class Company extends Component<> {
     return (
       <PageHeaderWrapper>
         <Card>
+          <Button icon="plus" type="primary" style={{ marginBottom: '20px' }}>
+            新建
+          </Button>
           <Table columns={columns} rowSelection={rowSelection} dataSource={data} />
         </Card>
       </PageHeaderWrapper>
