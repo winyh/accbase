@@ -134,18 +134,21 @@ export default {
               icon: 'smile',
               path: '/exception/404',
               component: './Exception404',
+              hideInMenu: true,
             },
             {
               name: '500',
               icon: 'smile',
               path: '/exception/500',
               component: './Exception500',
+              hideInMenu: true,
             },
             {
               name: '403',
               icon: 'smile',
               path: '/exception/403',
               component: './Exception403',
+              hideInMenu: true,
             },
             {
               name: 'list',
@@ -167,6 +170,11 @@ export default {
                   name: 'rolelist',
                   path: '/sms/rolelist',
                   component: './user/role',
+                },
+                {
+                  name: 'company',
+                  path: '/sms/company',
+                  component: './user/company',
                 },
               ],
             },

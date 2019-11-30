@@ -55,6 +55,7 @@ export default {
   'menu.sms': '用户管理',
   'menu.sms.userlist': '用户列表',
   'menu.sms.rolelist': '角色列表',
+  'menu.sms.company': '组织机构',
   'menu.power': '权限管理',
   'menu.power.powerlist': '权限列表',
   'menu.power.menulist': '菜单列表',
