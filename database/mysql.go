@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-	_ "github.com/go-sql-driver/mysql" //加载mysql驱动
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

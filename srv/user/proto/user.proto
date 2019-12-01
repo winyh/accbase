@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package user;
+
+service User{
+    rpc Login(LoginRequest) returns (LoginResponse) {} // 用户登录
+    rpc Register(RegisterRequest) returns (RegisterResponse) {} // 用户注册
+}
+
+message LoginRequest {
+    string userName = 1; // 1.账号和密码登录
+    string mobile = 2; // 2.手机号和验证码登录
+    string password = 3; // 密码
+    string captcha = 4; // 验证码
+}
+
+message LoginResponse {
+    string token = 1; // 令牌
+    string authority = 2; // 权限
+}
+
+message RegisterRequest {
+    string mobile = 1;
+    string email = 2;
+    string password = 3;
+    string confirm = 4;
+    string captcha = 5;
+}
+
+message RegisterResponse {
+    string token = 1;
+    string authority = 2;
+}
+

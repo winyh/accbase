@@ -8,8 +8,9 @@ require (
 	github.com/casbin/gorm-adapter v1.0.0 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/gin-gonic/gin v1.4.0 // indirect
+	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.2
-	github.com/jinzhu/gorm v1.9.11 // indirect
+	github.com/jinzhu/gorm v1.9.11
 	github.com/micro/go-micro v1.16.0
 	github.com/micro/micro v1.16.0 // indirect
 	github.com/spf13/cobra v0.0.5 // indirect
