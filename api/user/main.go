@@ -1,7 +1,7 @@
 package main
 
 import (
-	auth "accbase/srv/auth/proto"
+	user "accbase/srv/user/proto"
 	"context"
 	"encoding/json"
 	"github.com/micro/go-micro"
@@ -11,91 +11,120 @@ import (
 	"strings"
 )
 
-type Auth struct {
-	Client auth.AuthService
+type User struct {
+	Client user.UserService
 }
 
-func (a *Auth) Register(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	log.Print("Received Auth.Register API request")
+type Response struct {
+	Status bool
+	Message string
+	Token string
+	Data string
+}
+
+func (u *User) Register(ctx context.Context, req *api.Request, rsp *api.Response) error {
+	log.Print("收到 User.Register API 请求")
 
 	name, ok := req.Post["userName"]
 	if !ok || len(name.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "UserName cannot be blank")
+		return errors.BadRequest("go.micro.api.user", "UserName cannot be blank")
+	}
+
+	mobile, ok := req.Post["mobile"]
+	if !ok || len(mobile.Values) == 0 {
+		return errors.BadRequest("go.micro.api.user", "Mobile cannot be blank")
+	}
+
+	email, ok := req.Post["email"]
+	if !ok || len(email.Values) == 0 {
+		return errors.BadRequest("go.micro.api.user", "Email cannot be blank")
 	}
 
 	password, _p := req.Post["password"]
 	if !_p || len(password.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "Password cannot be blank")
+		return errors.BadRequest("go.micro.api.user", "Password cannot be blank")
 	}
 
-	verifyPassword, _v := req.Post["verifyPassword"]
-	if !_v || len(verifyPassword.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "VerifyPassword cannot be blank")
+	confirm, _v := req.Post["confirm"]
+	if !_v || len(confirm.Values) == 0 {
+		return errors.BadRequest("go.micro.api.user", "Confirm cannot be blank")
 	}
 
-	if strings.Join(verifyPassword.Values, "") != strings.Join(password.Values, "")  {
-		return errors.BadRequest("go.micro.api.auth", "Password and VerifyPassword cannot be different")
+	if strings.Join(confirm.Values, "") != strings.Join(password.Values, "")  {
+		return errors.BadRequest("go.micro.api.user", "Password and Confirm cannot be different")
 	}
 
-	response, err := a.Client.Register(ctx, &auth.RegisterRequest{
-		UserName:  "winyh",
-		Password: "123456",
-		VerifyPassword:"123456",
+	response, err := u.Client.Register(ctx, &user.RegisterRequest{
+		UserName:  strings.Join(name.Values, ""),
+		Mobile: strings.Join(mobile.Values, ""),
+		Email: strings.Join(email.Values, ""),
+		Password: strings.Join(password.Values, ""),
+		Confirm: strings.Join(confirm.Values, ""),
 	})
+
 	if err != nil {
 		return err
 	}
 
 	rsp.StatusCode = 200
-	b, _ := json.Marshal(map[string]string{
-		"message":"注册成功！",
-		"token": response.Token,
-	})
+	data := Response{
+		Status:response.Status,
+		Message:response.Message,
+		Token: response.Token,
+	}
+
+	b, _ := json.Marshal(data)
+
 	rsp.Body = string(b)
 
 	return nil
 }
 
-func (a *Auth) Login(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	log.Print("Received Auth.Login API request")
+func (u *User) Login(ctx context.Context, req *api.Request, rsp *api.Response) error {
+	log.Print("收到 Auth.Login API 请求")
 
 	// name, ok := req.Get["userName"] // Get 请求参数获取方式
 	name, ok := req.Post["userName"]
 	if !ok || len(name.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "UserName cannot be blank")
+		return errors.BadRequest("go.micro.api.user", "UserName cannot be blank")
 	}
 
 	password, ok := req.Post["password"]
 	if !ok || len(password.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "Password cannot be blank")
+		return errors.BadRequest("go.micro.api.user", "Password cannot be blank")
 	}
 
-	response, err := a.Client.Login(ctx, &auth.LoginRequest{
-		UserName:  "winyh",
-		Password: "123456",
+	response, err := u.Client.Login(ctx, &user.LoginRequest{
+		UserName:  strings.Join(name.Values, ""),
+		Password: strings.Join(password.Values, ""),
 	})
+
 	if err != nil {
 		return err
 	}
 
 	rsp.StatusCode = 200
-	b, _ := json.Marshal(map[string]string{
-		"message":"登录成功！",
-		"token": response.Token,
-	})
+
+	data := Response{
+		Status:response.Status,
+		Message:response.Message,
+		Token: response.Token,
+	}
+
+	b, _ := json.Marshal(data)
 	rsp.Body = string(b)
 
 	return nil
 }
 
-func (a *Auth) UserInfo(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	log.Print("Received Auth.UserInfo API request")
+func (u *User) Account(ctx context.Context, req *api.Request, rsp *api.Response) error {
+	log.Print("收到 Auth.Account API 请求")
 	token, ok := req.Get["token"]
 	if !ok || len(token.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "Token cannot be blank")
+		return errors.BadRequest("go.micro.api.user", "Token cannot be blank")
 	}
 
-	response, err := a.Client.UserInfo(ctx, &auth.UserInfoRequest{
+	response, err := u.Client.Account(ctx, &user.AccountRequest{
 		Token:  strings.Join(token.Values, ""),
 	})
 
@@ -104,32 +133,15 @@ func (a *Auth) UserInfo(ctx context.Context, req *api.Request, rsp *api.Response
 	}
 
 	rsp.StatusCode = 200
-	b, _ := json.Marshal(map[string]string{
-		"message":"请求成功！",
-		"userName": response.UserName,
-	})
+
+	data := Response{
+		Status:response.Status,
+		Message:response.Message,
+		Data: response.UserName,
+	}
+
+	b, _ := json.Marshal(data)
 	rsp.Body = string(b)
-
-	return nil
-}
-
-func (a *Auth) Roles(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	token, ok := req.Post["token"]
-	if !ok || len(token.Values) == 0 {
-		return errors.BadRequest("go.micro.api.auth", "Token cannot be blank")
-	}
-	response, err := a.Client.Roles(ctx, &auth.RoleRequest{
-		Token: strings.Join(token.Values, ""),
-	})
-	if err != nil {
-		return err
-	}
-
-	rsp.StatusCode = 200
-	b, _ := json.Marshal(map[string]string{
-		"message":"请求成功！",
-		"userRoles": string(response.Roles[:]),
-	})
 	rsp.Body = string(b)
 
 	return nil
@@ -138,14 +150,14 @@ func (a *Auth) Roles(ctx context.Context, req *api.Request, rsp *api.Response) e
 func main() {
 
 	service := micro.NewService(
-		micro.Name("go.micro.api.auth"),
+		micro.Name("go.micro.api.user"),
 	)
 
 	service.Init()
 
 	_ = service.Server().Handle(
 		service.Server().NewHandler(
-			&Auth{Client: auth.NewAuthService("go.micro.srv.auth", service.Client())},
+			&User{Client: user.NewUserService("go.micro.srv.user", service.Client())},
 		),
 	)
 

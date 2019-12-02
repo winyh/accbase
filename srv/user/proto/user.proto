@@ -5,6 +5,7 @@ package user;
 service User{
     rpc Login(LoginRequest) returns (LoginResponse) {} // 用户登录
     rpc Register(RegisterRequest) returns (RegisterResponse) {} // 用户注册
+    rpc Account(AccountRequest) returns (AccountResponse) {} // 用户注册
 }
 
 message LoginRequest {
@@ -17,18 +18,34 @@ message LoginRequest {
 message LoginResponse {
     string token = 1; // 令牌
     string authority = 2; // 权限
+    string message = 3; // 提示信息
+    bool status = 4; // 请求状态
 }
 
 message RegisterRequest {
-    string mobile = 1;
-    string email = 2;
-    string password = 3;
-    string confirm = 4;
-    string captcha = 5;
+    string userName = 1;
+    string mobile = 2;
+    string email = 3;
+    string password = 4;
+    string confirm = 5;
+    string captcha = 6;
 }
 
 message RegisterResponse {
     string token = 1;
     string authority = 2;
+    string message = 3;
+    bool status = 4;
+}
+
+message AccountRequest {
+    string token = 1;
+}
+
+message AccountResponse {
+    string userName = 1;
+    string authority = 2;
+    string message = 3;
+    bool status = 4;
 }
 
