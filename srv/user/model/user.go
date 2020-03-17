@@ -12,6 +12,7 @@ type User struct {
 	Password string `json:"password"  binding:"required"`
 	Mobile string `json:"mobile" binding:"required"`
 	Email string `json:"email"`
+	Status int32 `json:"status"`
 }
 
 // 新建
@@ -37,6 +38,12 @@ func Update(id int64, name string, mobile string, email string)(user User){
 // 查询所有
 func FindAll() (user []User,err error) {
 	DB.Find(&user)
+	return
+}
+
+// 根据不定条件查询
+func FindUserList(userName string,  status int32) (users []User,err error) {
+	DB.Where("user_name LIKE ?", "%" + userName + "%").Or(User{Status: status}).Find(&users)
 	return
 }
 

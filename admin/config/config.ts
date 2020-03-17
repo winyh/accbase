@@ -203,12 +203,12 @@ export default {
                 {
                   name: 'info',
                   path: '/system/info',
-                  component: './user/power',
+                  component: './system/info',
                 },
                 {
                   name: 'loglist',
                   path: '/system/loglist',
-                  component: './user/menu',
+                  component: './system/log',
                 },
               ],
             },

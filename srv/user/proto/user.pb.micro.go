@@ -37,6 +37,7 @@ type UserService interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...client.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...client.CallOption) (*RegisterResponse, error)
 	Account(ctx context.Context, in *AccountRequest, opts ...client.CallOption) (*AccountResponse, error)
+	UserList(ctx context.Context, in *UserListRequest, opts ...client.CallOption) (*UserListResponse, error)
 }
 
 type userService struct {
@@ -87,12 +88,23 @@ func (c *userService) Account(ctx context.Context, in *AccountRequest, opts ...c
 	return out, nil
 }
 
+func (c *userService) UserList(ctx context.Context, in *UserListRequest, opts ...client.CallOption) (*UserListResponse, error) {
+	req := c.c.NewRequest(c.name, "User.UserList", in)
+	out := new(UserListResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for User service
 
 type UserHandler interface {
 	Login(context.Context, *LoginRequest, *LoginResponse) error
 	Register(context.Context, *RegisterRequest, *RegisterResponse) error
 	Account(context.Context, *AccountRequest, *AccountResponse) error
+	UserList(context.Context, *UserListRequest, *UserListResponse) error
 }
 
 func RegisterUserHandler(s server.Server, hdlr UserHandler, opts ...server.HandlerOption) error {
@@ -100,6 +112,7 @@ func RegisterUserHandler(s server.Server, hdlr UserHandler, opts ...server.Handl
 		Login(ctx context.Context, in *LoginRequest, out *LoginResponse) error
 		Register(ctx context.Context, in *RegisterRequest, out *RegisterResponse) error
 		Account(ctx context.Context, in *AccountRequest, out *AccountResponse) error
+		UserList(ctx context.Context, in *UserListRequest, out *UserListResponse) error
 	}
 	type User struct {
 		user
@@ -122,4 +135,8 @@ func (h *userHandler) Register(ctx context.Context, in *RegisterRequest, out *Re
 
 func (h *userHandler) Account(ctx context.Context, in *AccountRequest, out *AccountResponse) error {
 	return h.UserHandler.Account(ctx, in, out)
+}
+
+func (h *userHandler) UserList(ctx context.Context, in *UserListRequest, out *UserListResponse) error {
+	return h.UserHandler.UserList(ctx, in, out)
 }

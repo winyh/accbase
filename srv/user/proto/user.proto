@@ -6,6 +6,7 @@ service User{
     rpc Login(LoginRequest) returns (LoginResponse) {} // 用户登录
     rpc Register(RegisterRequest) returns (RegisterResponse) {} // 用户注册
     rpc Account(AccountRequest) returns (AccountResponse) {} // 用户注册
+    rpc UserList(UserListRequest) returns (UserListResponse){} // 用户列表
 }
 
 message LoginRequest {
@@ -48,4 +49,18 @@ message AccountResponse {
     string message = 3;
     bool status = 4;
 }
+
+message UserListRequest {
+    string userName = 1; // 根据用户名称模糊查询
+    int32 status = 2; // 用户状态
+    int32 pageNum = 3; // 当前页
+    int32 pageSize = 4; // 每页条数
+    int32 roleId = 5; // 角色id
+}
+
+message UserListResponse {
+    repeated string list = 1;
+    bool status = 2;
+}
+
 

@@ -101,6 +101,17 @@ func (u *User) Account(ctx context.Context, req *user.AccountRequest, rsp *user.
 	return nil
 }
 
+func (u *User) UserList(ctx context.Context, req *user.UserListRequest, rsp *user.UserListResponse) error{
+	log.Fatal("收到了 User.UserList 获取用户列表请求！")
+	userName := req.UserName
+	status := req.Status
+	result, _ := model.FindUserList(userName, status)
+	rsp.Status = true
+	rsp.List = result
+	return nil
+}
+
+
 // 生成 token
 func CreateToken(userName string, password string) string {
 	hmacSampleSecret := []byte("my_secret_key")

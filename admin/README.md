@@ -32,7 +32,7 @@ npm run lint
 npm run lint:fix
 ```
 
-### Test code
+### 代码测试
 
 ```bash
 npm test
@@ -40,4 +40,4 @@ npm test
 
 ## More
 
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+[Ant-Design-Pro 文档](https://pro.ant.design)
