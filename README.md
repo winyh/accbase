@@ -28,7 +28,9 @@
 
 ## 生成 proto 文件 (GOPATH/src 目录里执行)
 
+```
 protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/proto/auth.proto
+```
 
 ## 目录说明
 
@@ -179,6 +181,10 @@ Todo List
 9. 系统所有的角色列表 ❌
 10. 完成 docker 自动部署 ❌
 11. 项目开发思路详细说明 ❌
+
+
+### 版本说明
+golang:v1.14 darwin/amd64
 
 ## 注意事项
 1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
