@@ -1,4 +1,5 @@
 import { Card, Table, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React, { Component } from 'react';
 
@@ -105,7 +106,7 @@ class RoleList extends Component<> {
     return (
       <PageHeaderWrapper>
         <Card>
-          <Button icon="plus" type="primary" style={{ marginBottom: '20px' }}>
+          <Button icon={<PlusOutlined />} type="primary" style={{ marginBottom: '20px' }}>
             新建
           </Button>
           <Table columns={columns} dataSource={data} onChange={this.onChange} />

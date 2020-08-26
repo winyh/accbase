@@ -1,226 +1,136 @@
-import { IConfig, IPlugin } from 'umi-types';
-import defaultSettings from './defaultSettings'; // https://umijs.org/config/
+// https://umijs.org/config/
+import { defineConfig } from 'umi';
+import defaultSettings from './defaultSettings';
+import proxy from './proxy';
 
-import slash from 'slash2';
-import themePluginConfig from './themePluginConfig';
-const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
-// preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+const { REACT_APP_ENV } = process.env;
 
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
-const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
-const plugins: IPlugin[] = [
-  [
-    'umi-plugin-react',
-    {
-      antd: true,
-      dva: {
-        hmr: true,
-      },
-      locale: {
-        // default false
-        enable: true,
-        // default zh-CN
-        default: 'zh-CN',
-        // default true, when it is true, will use `navigator.language` overwrite default
-        baseNavigator: true,
-      },
-      // dynamicImport: {
-      //   loadingComponent: './components/PageLoading/index',
-      //   webpackChunkName: true,
-      //   level: 3,
-      // },
-      pwa: pwa
-        ? {
-            workboxPluginMode: 'InjectManifest',
-            workboxOptions: {
-              importWorkboxFrom: 'local',
-            },
-          }
-        : false, // default close dll, because issue https://github.com/ant-design/ant-design-pro/issues/4665
-      // dll features https://webpack.js.org/plugins/dll-plugin/
-      // dll: {
-      //   include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-      //   exclude: ['@babel/runtime', 'netlify-lambda'],
-      // },
-    },
-  ],
-  [
-    'umi-plugin-pro-block',
-    {
-      moveMock: false,
-      moveService: false,
-      modifyRequest: true,
-      autoAddMenu: true,
-    },
-  ],
-];
-
-if (isAntDesignProPreview) {
-  // 针对 preview.pro.ant.design 的 GA 统计代码
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
-  plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
-}
-
-export default {
-  plugins,
+export default defineConfig({
   hash: true,
+  antd: {},
+  dva: {
+    hmr: true,
+  },
+  layout: {
+    name: 'Accbase',
+    locale: true,
+    siderWidth: 208,
+  },
+  locale: {
+    // default zh-CN
+    default: 'zh-CN',
+    // default true, when it is true, will use `navigator.language` overwrite default
+    antd: true,
+    baseNavigator: true,
+  },
+  dynamicImport: {
+    loading: '@/components/PageLoading/index',
+  },
   targets: {
     ie: 11,
   },
-  // umi routes: https://umijs.org/zh/guide/router.html
+  // umi routes: https://umijs.org/docs/routing
   routes: [
     {
       path: '/user',
-      component: '../layouts/UserLayout',
+      layout: false,
       routes: [
         {
           name: 'login',
           path: '/user/login',
           component: './user/login',
         },
+      ],
+    },
+    {
+      path: '/welcome',
+      name: 'welcome',
+      icon: 'smile',
+      component: './Welcome',
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      icon: 'crown',
+      access: 'canAdmin',
+      component: './Admin',
+      routes: [
         {
-          name: '登录页',
+          path: '/admin/sub-page',
+          name: 'sub-page',
           icon: 'smile',
-          path: '/userlogin',
-          component: './UserLogin',
+          component: './Welcome',
+        },
+      ],
+    },
+    {
+      name: 'list.table-list',
+      icon: 'table',
+      path: '/list',
+      component: './ListTableList',
+    },
+    {
+      name: 'sms',
+      icon: 'user',
+      path: '/sms',
+      routes: [
+        {
+          name: 'user',
+          path: '/sms/user',
+          component: './user/list',
         },
         {
-          name: '注册结果页',
-          icon: 'smile',
-          path: '/userregisterresult',
-          component: './UserRegisterResult',
+          name: 'role',
+          path: '/sms/role',
+          component: './user/role',
         },
         {
-          name: '注册页',
-          icon: 'smile',
-          path: '/user/register',
-          component: './UserRegister',
+          name: 'power',
+          path: '/sms/power',
+          component: './user/power',
+        },
+        {
+          name: 'company',
+          path: '/sms/company',
+          component: './user/company',
+        },
+        {
+          name: 'post',
+          path: '/sms/post',
+          component: './user/menu',
+        },
+        {
+          name: 'menu',
+          path: '/sms/menu',
+          component: './user/menu',
+        },
+      ],
+    },
+    {
+      name: 'system',
+      icon: 'appstore',
+      path: '/system',
+      routes: [
+        {
+          name: 'info',
+          path: '/system/info',
+          component: './system/info',
+        },
+        {
+          name: 'log',
+          path: '/system/log',
+          component: './system/log',
+        },
+        {
+          name: 'dictionary',
+          path: '/system/dictionary',
+          component: './system/log',
         },
       ],
     },
     {
       path: '/',
-      component: '../layouts/SecurityLayout',
-      routes: [
-        {
-          path: '/',
-          component: '../layouts/BasicLayout',
-          authority: ['admin', 'user'],
-          routes: [
-            {
-              path: '/',
-              redirect: '/welcome',
-            },
-            {
-              path: '/welcome',
-              name: 'welcome',
-              icon: 'smile',
-              component: './Welcome',
-            },
-            {
-              path: '/admin',
-              name: 'admin',
-              icon: 'crown',
-              component: './Admin',
-              authority: ['admin'],
-            },
-            {
-              name: '404',
-              icon: 'smile',
-              path: '/exception/404',
-              component: './Exception404',
-              hideInMenu: true,
-            },
-            {
-              name: '500',
-              icon: 'smile',
-              path: '/exception/500',
-              component: './Exception500',
-              hideInMenu: true,
-            },
-            {
-              name: '403',
-              icon: 'smile',
-              path: '/exception/403',
-              component: './Exception403',
-              hideInMenu: true,
-            },
-            {
-              name: 'list',
-              icon: 'smile',
-              path: '/listtablelist',
-              component: './ListTableList',
-            },
-            {
-              name: 'sms',
-              icon: 'user',
-              path: '/sms',
-              routes: [
-                {
-                  name: 'userlist',
-                  path: '/sms/userlist',
-                  component: './user/list',
-                },
-                {
-                  name: 'rolelist',
-                  path: '/sms/rolelist',
-                  component: './user/role',
-                },
-                {
-                  name: 'company',
-                  path: '/sms/company',
-                  component: './user/company',
-                },
-              ],
-            },
-            {
-              name: 'power',
-              icon: 'safety-certificate',
-              path: '/power',
-              routes: [
-                {
-                  name: 'powerlist',
-                  path: '/power/powerlist',
-                  component: './user/power',
-                },
-                {
-                  name: 'menulist',
-                  path: '/power/menulist',
-                  component: './user/menu',
-                },
-              ],
-            },
-            {
-              name: 'system',
-              icon: 'appstore',
-              path: '/system',
-              routes: [
-                {
-                  name: 'info',
-                  path: '/system/info',
-                  component: './system/info',
-                },
-                {
-                  name: 'loglist',
-                  path: '/system/loglist',
-                  component: './system/log',
-                },
-              ],
-            },
-            {
-              component: './404',
-            },
-          ],
-        },
-        {
-          component: './404',
-        },
-      ],
+      redirect: '/welcome',
     },
     {
       component: './404',
@@ -229,55 +139,13 @@ export default {
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
+    'primary-color': defaultSettings.primaryColor,
   },
-  define: {
-    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
-      ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-  },
+  // @ts-ignore
+  title: false,
   ignoreMomentLocale: true,
-  lessLoaderOptions: {
-    javascriptEnabled: true,
-  },
-  disableRedirectHoist: true,
-  cssLoaderOptions: {
-    modules: true,
-    getLocalIdent: (
-      context: {
-        resourcePath: string;
-      },
-      _: string,
-      localName: string,
-    ) => {
-      if (
-        context.resourcePath.includes('node_modules') ||
-        context.resourcePath.includes('ant.design.pro.less') ||
-        context.resourcePath.includes('global.less')
-      ) {
-        return localName;
-      }
-
-      const match = context.resourcePath.match(/src(.*)/);
-
-      if (match && match[1]) {
-        const antdProPath = match[1].replace('.less', '');
-        const arr = slash(antdProPath)
-          .split('/')
-          .map((a: string) => a.replace(/([A-Z])/g, '-$1'))
-          .map((a: string) => a.toLowerCase());
-        return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
-      }
-
-      return localName;
-    },
-  },
+  proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
-  }, // chainWebpack: webpackPlugin,
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
-} as IConfig;
+  },
+});

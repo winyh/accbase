@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-import { TabPaneProps } from 'antd/es/tabs';
+import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
 import LoginContext, { LoginContextProps } from './LoginContext';
 
@@ -14,36 +12,30 @@ const generateId = (() => {
   };
 })();
 
+type TabPaneProps = Parameters<typeof Tabs.TabPane>[0];
+
 interface LoginTabProps extends TabPaneProps {
   tabUtil: LoginContextProps['tabUtil'];
+  key?: string;
 }
 
-class LoginTab extends Component<LoginTabProps> {
-  uniqueId: string = '';
-
-  constructor(props: LoginTabProps) {
-    super(props);
-    this.uniqueId = generateId('login-tab-');
-  }
-
-  componentDidMount() {
-    const { tabUtil } = this.props;
+const LoginTab: React.FC<LoginTabProps> = (props) => {
+  useEffect(() => {
+    const uniqueId = generateId('login-tab-');
+    const { tabUtil } = props;
     if (tabUtil) {
-      tabUtil.addTab(this.uniqueId);
+      tabUtil.addTab(uniqueId);
     }
-  }
-
-  render() {
-    const { children } = this.props;
-    return <TabPane {...this.props}>{children}</TabPane>;
-  }
-}
+  }, []);
+  const { children, ...rest } = props;
+  return <TabPane {...rest}>{children}</TabPane>;
+};
 
 const WrapContext: React.FC<TabPaneProps> & {
   typeName: string;
-} = props => (
+} = (props) => (
   <LoginContext.Consumer>
-    {value => <LoginTab tabUtil={value.tabUtil} {...props} />}
+    {(value) => <LoginTab tabUtil={value.tabUtil} {...props} />}
   </LoginContext.Consumer>
 );
 
