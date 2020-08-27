@@ -15,6 +15,9 @@
 </div> 
 这是一个基于Go micro + Casbin + Gin + Gorm + JWT 的用户认证和权限的微服务
 
+### 权限基础知识
+
+[权限基础知识 wiki](https://github.com/winyh/accbase/wiki/%E6%9D%83%E9%99%90%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)
 
 ### 基本原理图(重点理解聚合层)
 
@@ -40,19 +43,20 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. accbase/srv/auth/prot
 ├── cli                                        // cli 服务调用
 ├── cmd                                        // main函数文件目录
 ├── configs                                    // 项目配置
-|   |—— model.conf                             // Casbin的模型配置（当前模式是RBAC基于角色的访问控制） 
+|   |—— model.conf                             // Casbin的模型配置（当前模式是RBAC基于角色的访问控制）
 |   |—— policy.csv                             // Casbin的策略配置
 |—— database                                   // 数据库配置(gorm)
 ├── public                                     // 静态资源目录
-|   |—— gopher.svg                             // logo 
+|   |—— gopher.svg                             // logo
 |—— srv                                        // 数据库配置(gorm)
-|   |—— auth                                   // auth srv 服务 
+|   |—— auth                                   // auth srv 服务
 |—— go.mod                                     // 项目依赖管理
 |—— Dockerfile                                 // Docker 文件
 |—— README.md                                  // 说明文档
 ```
 
 ## 依赖
+
 etcd 服务发现
 
 ```
@@ -61,37 +65,43 @@ go get -v go.etcd.io/etcd
 
 go get -v go.etcd.io/etcd/etcdctl
 ```
+
 etcd 启动
 
 ```
 etcd
-``` 
+```
 
 ## 使用
 
 进入到项目根目录(默认使用 mdns 服务发现)
 
-运行srv服务
+运行 srv 服务
+
 ```
 go run srv/auth/main.go
 ```
 
-运行cli测试返回
+运行 cli 测试返回
+
 ```
 go run cli/main.go
 ```
 
-运行api服务
+运行 api 服务
+
 ```
 go run api/user/main.go
 ```
 
-运行micro api 网关服务
+运行 micro api 网关服务
+
 ```
 micro api --handler=api --enable_rpc
 ```
 
-运行micro web 控制台面板
+运行 micro web 控制台面板
+
 ```
 micro web
 ```
@@ -101,6 +111,7 @@ micro web
 请查看 [管理界面](https://github.com/winyh/accbase/tree/master/admin/README.md)
 
 ## 调用示例
+
 默认账号密码：
 
 ```
@@ -110,6 +121,7 @@ password:"123456"
 ```
 
 /auth/auth/register 注册
+
 ```
 Action:POST
 URL: http://localhost:8080/auth/auth/register
@@ -129,6 +141,7 @@ Response:
 ```
 
 /auth/auth/login 登录
+
 ```
 Action:POST
 URL: http://localhost:8080/auth/auth/login
@@ -147,33 +160,33 @@ Response:
 ```
 
 /rpc 直接调用
-   ```
-   Action:POST
-   URL: http://localhost:8080/rpc 
-   
-   Params:
-   {
-   	"service":"go.micro.srv.auth",
-   	"method":"Auth.Login",
-   	"request":{
-   		"userName":"winyh"
-   	}
-   }
-   
-   Response:
-   {
-       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiIiwidXNlcm5hbWUiOiJ3aW55aCJ9.kDEBDzrP1yXbzFZ52q-BK7PZYEK_KBphnthOO9zFK9c"
-   }
-   
-   ```
 
+```
+Action:POST
+URL: http://localhost:8080/rpc
 
+Params:
+{
+	"service":"go.micro.srv.auth",
+	"method":"Auth.Login",
+	"request":{
+		"userName":"winyh"
+	}
+}
+
+Response:
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzA3MDg4MDAsInBhc3N3b3JkIjoiIiwidXNlcm5hbWUiOiJ3aW55aCJ9.kDEBDzrP1yXbzFZ52q-BK7PZYEK_KBphnthOO9zFK9c"
+}
+
+```
 
 Todo List
-1. 用户注册，获取token ✅
-2. 用户登录，获取token ✅
-3. 根据token，获取用户信息 ✅
-4. 根据token，获取用户角色集合 ❌
+
+1. 用户注册，获取 token ✅
+2. 用户登录，获取 token ✅
+3. 根据 token，获取用户信息 ✅
+4. 根据 token，获取用户角色集合 ❌
 5. 用户新增角色 ❌
 6. 角色新增权限 ❌
 7. 角色的增删改查 ❌
@@ -182,12 +195,15 @@ Todo List
 10. 完成 docker 自动部署 ❌
 11. 项目开发思路详细说明 ❌
 
-
 ### 版本说明
+
 golang:v1.14 darwin/amd64
 
 ## 注意事项
+
 1. 请注意保持 micro@1.14.0 和 go-micro@1.14.0 版本一致
-2. 直接 `/rpc` 调用服务时，开启 `micro api --handle=api --enable_rpc` 一定要加上 --enable_rpc 参数，否则返回 500 错误 
-___________________________
+2. 直接 `/rpc` 调用服务时，开启 `micro api --handle=api --enable_rpc` 一定要加上 --enable_rpc 参数，否则返回 500 错误
+
+---
+
 3.版本升级到了 micro@1.16.0 / go-micro@1.16.0
