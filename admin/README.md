@@ -1,38 +1,52 @@
-# Accbase Admin
+# Ant Design Pro
 
-Accbase Admin 是基于 [Ant Design Pro](https://pro.ant.design). 开箱即用的权限管理界面
+This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
 
-## 安装依赖
+## Environment Prepare
+
+Install `node_modules`:
 
 ```bash
 npm install
 ```
 
-### 项目启动
+or
+
+```bash
+yarn
+```
+
+## Provided Scripts
+
+Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+
+Scripts provided in `package.json`. It's safe to modify or add additional script:
+
+### Start project
 
 ```bash
 npm start
 ```
 
-### 项目构建
+### Build project
 
 ```bash
 npm run build
 ```
 
-### 代码风格检查
+### Check code style
 
 ```bash
 npm run lint
 ```
 
-### 自动修复代码
+You can also use script to auto fix some lint error:
 
 ```bash
 npm run lint:fix
 ```
 
-### 代码测试
+### Test code
 
 ```bash
 npm test
@@ -40,4 +54,4 @@ npm test
 
 ## More
 
-[Ant-Design-Pro 文档](https://pro.ant.design)
+You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).

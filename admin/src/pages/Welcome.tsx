@@ -1,8 +1,6 @@
 import React from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { Card, Typography, Alert } from 'antd';
-
+import { PageContainer } from '@ant-design/pro-layout';
+import { Card, Alert, Typography } from 'antd';
 import styles from './Welcome.less';
 
 const CodePreview: React.FC<{}> = ({ children }) => (
@@ -14,7 +12,7 @@ const CodePreview: React.FC<{}> = ({ children }) => (
 );
 
 export default (): React.ReactNode => (
-  <PageHeaderWrapper>
+  <PageContainer>
     <Card>
       <Alert
         message="Accbase 是基于 Go-micro Casbin Gorm JWT 开发，以微服务的方式构建权限管理系统"
@@ -27,14 +25,12 @@ export default (): React.ReactNode => (
         }}
       />
       <Typography.Text strong>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/winyh/accbase">
-          <FormattedMessage
-            id="app.welcome.link.block-list"
-            defaultMessage="基于 Go-micro Casbin Gorm 开发，以微服务的方式构建权限管理系统"
-          />
+        权限管理{' '}
+        <a href="https://protable.ant.design/" rel="noopener noreferrer" target="__blank">
+          基于 go-micro 开发的微服务
         </a>
       </Typography.Text>
       <CodePreview>git clone https://github.com/winyh/accbase</CodePreview>
     </Card>
-  </PageHeaderWrapper>
+  </PageContainer>
 );

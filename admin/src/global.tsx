@@ -1,15 +1,16 @@
 import { Button, message, notification } from 'antd';
 
 import React from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;
+
 // if pwa is true
 if (pwa) {
   // Notify user if offline now
   window.addEventListener('sw.offline', () => {
-    message.warning(formatMessage({ id: 'app.pwa.offline' }));
+    message.warning(useIntl().formatMessage({ id: 'app.pwa.offline' }));
   });
 
   // Pop up a prompt on the page asking the user if they want to use the latest version
@@ -25,7 +26,7 @@ if (pwa) {
       // Send skip-waiting event to waiting SW with MessageChannel
       await new Promise((resolve, reject) => {
         const channel = new MessageChannel();
-        channel.port1.onmessage = msgEvent => {
+        channel.port1.onmessage = (msgEvent) => {
           if (msgEvent.data.error) {
             reject(msgEvent.data.error);
           } else {
@@ -47,12 +48,12 @@ if (pwa) {
           reloadSW();
         }}
       >
-        {formatMessage({ id: 'app.pwa.serviceworker.updated.ok' })}
+        {useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated.ok' })}
       </Button>
     );
     notification.open({
-      message: formatMessage({ id: 'app.pwa.serviceworker.updated' }),
-      description: formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
+      message: useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated' }),
+      description: useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
       btn,
       key,
       onClose: async () => {},
@@ -62,20 +63,20 @@ if (pwa) {
   // unregister service worker
   const { serviceWorker } = navigator;
   if (serviceWorker.getRegistrations) {
-    serviceWorker.getRegistrations().then(sws => {
-      sws.forEach(sw => {
+    serviceWorker.getRegistrations().then((sws) => {
+      sws.forEach((sw) => {
         sw.unregister();
       });
     });
   }
-  serviceWorker.getRegistration().then(sw => {
+  serviceWorker.getRegistration().then((sw) => {
     if (sw) sw.unregister();
   });
 
   // remove all caches
   if (window.caches && window.caches.keys) {
-    caches.keys().then(keys => {
-      keys.forEach(key => {
+    caches.keys().then((keys) => {
+      keys.forEach((key) => {
         caches.delete(key);
       });
     });

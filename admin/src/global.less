@@ -46,7 +46,9 @@ ol {
   }
 }
 
-// 后台管理logo 位置调整
-.ant-pro-sider-menu-logo {
-  padding-left: 14px;
+// 兼容IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
+  }
 }
